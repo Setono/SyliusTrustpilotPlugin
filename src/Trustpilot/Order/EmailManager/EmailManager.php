@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager;
 
 use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
@@ -25,6 +27,7 @@ class EmailManager implements EmailManagerInterface
 
     /**
      * EmailManager constructor.
+     *
      * @param SenderInterface $emailSender
      * @param string $trustpilotEmail
      * @param string $locale
@@ -48,11 +51,11 @@ class EmailManager implements EmailManagerInterface
         $customer = $order->getCustomer();
 
         $this->emailSender->send('trustpilot_email', [
-            $this->trustpilotEmail
+            $this->trustpilotEmail,
         ], [
             'order' => $order,
             'customer' => $customer,
-            'locale' => $this->locale
+            'locale' => $this->locale,
         ]);
     }
 }

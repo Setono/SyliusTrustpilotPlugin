@@ -16,15 +16,16 @@ final class InvitesLimitOrderEligibilityChecker implements OrderEligibilityCheck
     /**
      * @var OrderRepositoryInterface
      */
-    protected $orderRepository;
+    private $orderRepository;
 
     /**
      * @var int
      */
-    protected $limit;
+    private $limit;
 
     /**
      * InvitesLimitOrderEligibilityChecker constructor.
+     *
      * @param OrderRepositoryInterface $orderRepository
      * @param int $limit
      */
@@ -46,7 +47,7 @@ final class InvitesLimitOrderEligibilityChecker implements OrderEligibilityCheck
         /** @var CustomerInterface $customer */
         $customer = $order->getCustomer();
 
-        return array_sum($customer->getOrders()->map(function(OrderInterface $order){
+        return array_sum($customer->getOrders()->map(function (OrderInterface $order) {
             return $order->getTrustpilotEmailsSent();
         })->toArray()) < $this->limit;
     }

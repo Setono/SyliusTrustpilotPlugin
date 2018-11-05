@@ -23,6 +23,7 @@ class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
 
     /**
      * LatestOrdersProvider constructor.
+     *
      * @param OrderRepositoryInterface $orderRepository
      * @param int $latestDays
      */

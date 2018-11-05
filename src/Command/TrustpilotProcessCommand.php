@@ -21,6 +21,7 @@ class TrustpilotProcessCommand extends Command
 
     /**
      * TrustpilotProcessCommand constructor.
+     *
      * @param TrustpilotOrdersProcessorInterface $trustpilotOrdersProcessor
      */
     public function __construct(

@@ -13,6 +13,7 @@ trait TrustpilotCustomerTrait
 {
     /**
      * @param Request $request
+     *
      * @return Response
      */
     public function trustpilotEnableAction(Request $request): Response
@@ -31,6 +32,7 @@ trait TrustpilotCustomerTrait
 
     /**
      * @param Request $request
+     *
      * @return Response
      */
     public function trustpilotDisableAction(Request $request): Response

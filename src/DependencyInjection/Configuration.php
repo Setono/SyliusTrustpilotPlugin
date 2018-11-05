@@ -38,6 +38,7 @@ final class Configuration implements ConfigurationInterface
                             ));
                         }
                     }
+
                     return $values;
                 })
             ->end()
