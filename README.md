@@ -144,7 +144,7 @@ feedback at Trustpilot.
     }
     ```
     
-* Configure plugin:
+* Add overrides configuration:
 
     ```yaml
     # config/packages/_sylius.yml
@@ -164,9 +164,33 @@ feedback at Trustpilot.
             order:
                 classes:
                     model: AppBundle\Model\Order
+    ```
+    
+* Add plugin configuration:
 
+    ```yaml
     setono_sylius_trustpilot:
+        # Mandatory.
+        # Bcc Trustpilot email from https://businessapp.b2b.trustpilot.com/#/invitations/afs-settings
         trustpilot_email: "%env(APP_TRUSTPILOT_EMAIL)%"
+
+        # Optional. Default value - 7.
+        # How many days after the order was completed Customer's email should be sent to Trustpilot
+        send_in_days: 3
+
+        # Optional. Default value - send_in_days + 2.
+        # If you decrease send_in_days on live project, you should keep
+        # process_latest_days old value for more than that amount of days.
+        # For example, if you had send_in_days: 7 and changed to
+        # send_in_days: 3, then you should keep process_latest_days: 9 (7+2)
+        # for at least next 10 days after this change
+        # After 10 days gone, you can remove this parameter from your configuration
+        process_latest_days: 9
+
+        # Optional. Default value - 0
+        # (meaning that the customer will receive an invite every time he makes an order)
+        # How many invites a Customer should receive before never asking him again
+        invites_limit: 0
     ```
 
 * Put environment variable to `.env.dist`, `.env.*.dist` files:
@@ -330,7 +354,6 @@ active time of day for your customers, e.g. not at 3:00.
 
 # TODO
 
-- Docs about process_latest_days
 - Tests
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-trustpilot-plugin.svg?style=flat-square
