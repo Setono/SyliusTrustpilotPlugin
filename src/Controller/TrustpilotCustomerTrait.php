@@ -27,7 +27,7 @@ trait TrustpilotCustomerTrait
         $resource->setTrustpilotEnabled(true);
         $this->repository->add($resource);
 
-        return $this->redirectHandler->redirectToReferer($configuration, $resource);
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 
     /**
@@ -46,6 +46,6 @@ trait TrustpilotCustomerTrait
         $resource->setTrustpilotEnabled(false);
         $this->repository->add($resource);
 
-        return $this->redirectHandler->redirectToReferer($configuration, $resource);
+        return $this->redirectHandler->redirectToReferer($configuration);
     }
 }
