@@ -1,0 +1,10 @@
+setono_sylius_trustpilot:
+    ui:
+        trustpilot_emails_sent: Trustpilot emails sent
+        trustpilot_enabled: Trustpilot enabled
+        order:
+            button:
+                trustpilot_enable:
+                    label: Enable
+                trustpilot_disable:
+                    label: Disable

@@ -1,3 +1,3 @@
 setono_sylius_trustpilot_admin:
-    resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/admin_routing.yml"
+    resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/admin_routing.yaml"
     prefix: /admin

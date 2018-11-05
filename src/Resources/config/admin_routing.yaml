@@ -1,0 +1,27 @@
+setono_sylius_trustpilot_admin_customer_trustpilot_enable:
+    path: /customer/trustpilot/enable
+    methods: [GET,POST]
+    defaults:
+        _controller: sylius.controller.customer:trustpilotEnableAction
+        _sylius:
+            csrf_protection: false
+            section: admin
+            permission: true
+            paginate: false
+            repository:
+                method: findOneById
+                arguments: [$id]
+
+setono_sylius_trustpilot_admin_customer_trustpilot_disable:
+    path: /customer/trustpilot/disable
+    methods: [GET,POST]
+    defaults:
+        _controller: sylius.controller.customer:trustpilotDisableAction
+        _sylius:
+            csrf_protection: false
+            section: admin
+            permission: true
+            paginate: false
+            repository:
+                method: findOneById
+                arguments: [$id]

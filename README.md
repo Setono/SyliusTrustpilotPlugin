@@ -35,7 +35,7 @@ feedback at Trustpilot.
     ```yaml
     # config/routes.yaml
     setono_sylius_trustpilot_admin:
-        resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/admin_routing.yml"
+        resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/admin_routing.yaml"
         prefix: /admin
     ```
 
@@ -156,6 +156,8 @@ feedback at Trustpilot.
             customer:
                 classes:
                     model: AppBundle\Model\Customer
+                    # If you already have your own CustomerController - use TrustpilotCustomerTrait instead
+                    controller: Setono\SyliusTrustpilotPlugin\Controller\CustomerController
                   
     sylius_order:
         resources:
@@ -248,10 +250,11 @@ active time of day for your customers, e.g. not at 3:00.
     cd tests/Application && \
         yarn install && \
         yarn run gulp && \
+        bin/console assets:install public -e $SYMFONY_ENV && \
         bin/console doctrine:database:drop --force -e $SYMFONY_ENV && \
         bin/console doctrine:database:create -e $SYMFONY_ENV && \
         bin/console doctrine:schema:create -e $SYMFONY_ENV && \
-        bin/console sylius:fixtures:load -e $SYMFONY_ENV && \
+        bin/console sylius:fixtures:load --no-interaction -e $SYMFONY_ENV && \
         bin/console server:run -d public -e $SYMFONY_ENV
     ```
 
@@ -327,7 +330,6 @@ active time of day for your customers, e.g. not at 3:00.
 
 # TODO
 
-- Admin with disable button
 - Docs about process_latest_days
 - Tests
 

@@ -3,3 +3,4 @@ sylius_customer:
         customer:
             classes:
                 model: AppBundle\Model\Customer
+                controller: Setono\SyliusTrustpilotPlugin\Controller\CustomerController
