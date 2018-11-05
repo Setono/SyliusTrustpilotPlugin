@@ -1,0 +1,14 @@
+{% block subject %}
+
+{% endblock %}
+
+{% block body %}
+<script type="application/json+trustpilot">
+    {
+        "referenceId": "{{ order.id }}",
+        "recipientEmail": "{{ customer.email }}",
+        "recipientName": "{{ customer.firstName }}",
+        "locale": "{{ locale }}"
+    }
+</script>
+{% endblock %}

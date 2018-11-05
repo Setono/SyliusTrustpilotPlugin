@@ -1,0 +1,2 @@
+imports:
+    - { resource: _sylius/sylius_mailer.yaml }

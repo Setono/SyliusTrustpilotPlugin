@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <defaults public="false" />
+
+        <service id="setono_sylius_trustpilot.order_eligibility_checker"
+                 class="Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\CompositeOrderEligibilityChecker">
+            <argument type="collection" />
+        </service>
+
+        <service id="setono_sylius_trustpilot.order_eligibility_checker.clients_trustpilot_enabled"
+                 class="Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\ClientsTrustpilotEnabledOrderEligibilityChecker">
+            <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
+        </service>
+
+        <service id="setono_sylius_trustpilot.order_eligibility_checker.invites_limit"
+                 class="Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\InvitesLimitOrderEligibilityChecker">
+            <argument type="service" id="sylius.repository.order" />
+            <argument>%setono_sylius_trustpilot.invites_limit%</argument>
+            <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
+        </service>
+
+    </services>
+</container>
