@@ -330,3 +330,12 @@ active time of day for your customers, e.g. not at 3:00.
 - Admin with disable button
 - Docs about process_latest_days
 - Tests
+
+[ico-version]: https://img.shields.io/packagist/v/setono/sylius-trustpilot-plugin.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/Setono/SyliusTrustpilotPlugin/master.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusTrustpilotPlugin.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/setono/sylius-trustpilot-plugin
+[link-travis]: https://travis-ci.org/Setono/SyliusTrustpilotPlugin
+[link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusTrustpilotPlugin
