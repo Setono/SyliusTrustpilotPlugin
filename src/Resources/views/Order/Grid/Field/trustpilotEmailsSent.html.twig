@@ -7,7 +7,7 @@
 
     {% if data.user.customer.isTrustpilotEnabled %}
         {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_disable', { 'id': data.user.customer.id }) %}
-        {{ buttons.default(path, null, null, 'toggle on', 'green') }}
+        {{ buttons.default(path, null, null, 'toggle on', 'teal') }}
     {% else %}
         {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_enable', { 'id': data.user.customer.id }) %}
         {{ buttons.default(path, null, null, 'toggle off', 'gray') }}
