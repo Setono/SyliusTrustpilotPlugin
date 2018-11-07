@@ -17,8 +17,7 @@ class ClientsTrustpilotEnabledOrderEligibilityCheckerSpec extends ObjectBehavior
 
     public function it_is_eligible(OrderTrustpilotAwareInterface $order, CustomerTrustpilotAwareInterface $customer, ShopUserInterface $shopUser): void
     {
-        $order->getUser()->willReturn($shopUser);
-        $shopUser->getCustomer()->willReturn($customer);
+        $order->getCustomer()->willReturn($customer);
         $customer->isTrustpilotEnabled()->willReturn(true);
 
         $this->isEligible($order)->shouldReturn(true);
