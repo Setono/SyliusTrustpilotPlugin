@@ -5,14 +5,14 @@ namespace spec\Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker
 use Doctrine\Common\Collections\ArrayCollection;
 use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
-use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\InvitesLimitOrderEligibilityChecker;
+use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\InvitesPerCustomerLimitOrderEligibilityChecker;
 use PhpSpec\ObjectBehavior;
 
-class InvitesLimitOrderEligibilityCheckerSpec extends ObjectBehavior
+class InvitesPerCustomerLimitOrderEligibilityCheckerSpec extends ObjectBehavior
 {
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(InvitesLimitOrderEligibilityChecker::class);
+        $this->shouldHaveType(InvitesPerCustomerLimitOrderEligibilityChecker::class);
     }
 
     public function let(): void
