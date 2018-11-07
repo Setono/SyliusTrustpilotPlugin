@@ -3,7 +3,7 @@
 namespace spec\Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor\TrustpilotOrdersProcessor;
@@ -31,7 +31,7 @@ class TrustpilotOrdersProcessorSpec extends ObjectBehavior
         OrderEligibilityCheckerInterface $orderEligibilityChecker,
         EmailManagerInterface $emailManager,
         ObjectManager $orderManager,
-        OrderInterface $order
+        OrderTrustpilotAwareInterface $order
     ): void {
         $orderEligibilityChecker->isEligible($order)->willReturn(true);
         $preQualifiedOrdersProvider->getOrders()->willReturn([$order]);

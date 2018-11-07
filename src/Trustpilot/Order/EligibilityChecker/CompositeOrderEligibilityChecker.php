@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker;
 
-use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Webmozart\Assert\Assert;
 
 final class CompositeOrderEligibilityChecker implements OrderEligibilityCheckerInterface
@@ -28,7 +28,7 @@ final class CompositeOrderEligibilityChecker implements OrderEligibilityCheckerI
     /**
      * {@inheritdoc}
      */
-    public function isEligible(OrderInterface $order): bool
+    public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
         foreach ($this->orderEligibilityCheckers as $orderEligibilityChecker) {
             if (!$orderEligibilityChecker->isEligible($order)) {

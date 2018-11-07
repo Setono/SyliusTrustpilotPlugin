@@ -6,7 +6,7 @@ namespace Setono\SyliusTrustpilotPlugin\Model;
 
 use Sylius\Component\Core\Model\CustomerInterface as BaseCustomerInterface;
 
-interface CustomerInterface extends BaseCustomerInterface
+interface CustomerTrustpilotAwareInterface extends BaseCustomerInterface
 {
     /**
      * @return bool

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Controller;
 
-use Setono\SyliusTrustpilotPlugin\Model\CustomerInterface;
+use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ trait TrustpilotCustomerTrait
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
-        /** @var CustomerInterface $resource */
+        /** @var CustomerTrustpilotAwareInterface $resource */
         $resource = $this->findOr404($configuration);
 
         $resource->setTrustpilotEnabled(true);
@@ -40,7 +40,7 @@ trait TrustpilotCustomerTrait
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
 
-        /** @var CustomerInterface $resource */
+        /** @var CustomerTrustpilotAwareInterface $resource */
         $resource = $this->findOr404($configuration);
 
         $resource->setTrustpilotEnabled(false);

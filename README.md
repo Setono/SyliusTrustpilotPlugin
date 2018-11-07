@@ -46,11 +46,11 @@ Send follow up emails to your customers to entice them to leave feedback for you
     
     namespace AppBundle\Model;
     
-    use Setono\SyliusTrustpilotPlugin\Model\CustomerInterface;
+    use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
     use Setono\SyliusTrustpilotPlugin\Model\CustomerTrait;
     use Sylius\Component\Core\Model\Customer as BaseCustomer;
     
-    class Customer extends BaseCustomer implements CustomerInterface
+    class Customer extends BaseCustomer implements CustomerTrustpilotAwareInterface
     {
         use CustomerTrait;
     }
@@ -83,11 +83,11 @@ Send follow up emails to your customers to entice them to leave feedback for you
     
     namespace AppBundle\Model;
     
-    use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
+    use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
     use Setono\SyliusTrustpilotPlugin\Model\OrderTrait;
     use Sylius\Component\Core\Model\Order as BaseOrder;
     
-    class Order extends BaseOrder implements OrderInterface
+    class Order extends BaseOrder implements OrderTrustpilotAwareInterface
     {
         use OrderTrait;
     }

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider\PreQualifiedOrdersProviderInterface;
@@ -55,7 +55,7 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
      */
     public function process(): void
     {
-        /** @var OrderInterface[] $preQualifiedOrders */
+        /** @var OrderTrustpilotAwareInterface[] $preQualifiedOrders */
         $preQualifiedOrders = $this->preQualifiedOrdersProvider->getOrders();
         foreach ($preQualifiedOrders as $order) {
             if ($this->orderEligibilityChecker->isEligible($order)) {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker;
 
-use Setono\SyliusTrustpilotPlugin\Model\CustomerInterface;
-use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
+use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class ClientsTrustpilotEnabledOrderEligibilityChecker implements OrderEligibilityCheckerInterface
@@ -13,12 +13,12 @@ final class ClientsTrustpilotEnabledOrderEligibilityChecker implements OrderElig
     /**
      * {@inheritdoc}
      */
-    public function isEligible(OrderInterface $order): bool
+    public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
         /** @var ShopUserInterface $user */
         $user = $order->getUser();
 
-        /** @var CustomerInterface $customer */
+        /** @var CustomerTrustpilotAwareInterface $customer */
         $customer = $user->getCustomer();
 
         return $customer->isTrustpilotEnabled();
