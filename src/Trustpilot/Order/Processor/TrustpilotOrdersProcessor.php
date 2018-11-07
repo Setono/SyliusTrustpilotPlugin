@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider\PreQualifiedOrdersProviderInterface;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 
 final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterface
 {
@@ -28,26 +28,26 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
     private $emailManager;
 
     /**
-     * @var OrderRepository
+     * @var ObjectManager
      */
-    private $orderRepository;
+    private $orderManager;
 
     /**
      * @param PreQualifiedOrdersProviderInterface $preQualifiedOrdersProvider
      * @param OrderEligibilityCheckerInterface $orderEligibilityChecker
      * @param EmailManagerInterface $emailManager
-     * @param OrderRepository $orderRepository
+     * @param ObjectManager $orderManager
      */
     public function __construct(
         PreQualifiedOrdersProviderInterface $preQualifiedOrdersProvider,
         OrderEligibilityCheckerInterface $orderEligibilityChecker,
         EmailManagerInterface $emailManager,
-        OrderRepository $orderRepository
+        ObjectManager $orderManager
     ) {
         $this->preQualifiedOrdersProvider = $preQualifiedOrdersProvider;
         $this->orderEligibilityChecker = $orderEligibilityChecker;
         $this->emailManager = $emailManager;
-        $this->orderRepository = $orderRepository;
+        $this->orderManager = $orderManager;
     }
 
     /**
@@ -65,7 +65,7 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
                 $order->setTrustpilotEmailsSent(
                     $order->getTrustpilotEmailsSent() + 1
                 );
-                $this->orderRepository->add($order);
+                $this->orderManager->flush();
             }
         }
     }

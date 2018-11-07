@@ -11,7 +11,7 @@
             <argument type="service" id="setono_sylius_trustpilot.order_provider.latest" />
             <argument type="service" id="setono_sylius_trustpilot.order_eligibility_checker" />
             <argument type="service" id="setono_sylius_trustpilot.email_manager" />
-            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.manager.order" />
         </service>
 
     </services>
