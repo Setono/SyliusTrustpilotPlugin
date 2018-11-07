@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager;
 
-use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 interface EmailManagerInterface
 {
