@@ -17,4 +17,9 @@ interface CustomerTrustpilotAwareInterface extends BaseCustomerInterface
      * @param bool $trustpilotEnabled
      */
     public function setTrustpilotEnabled(bool $trustpilotEnabled): void;
+
+    /**
+     * @return int
+     */
+    public function getTrustpilotEmailsSent(): int;
 }

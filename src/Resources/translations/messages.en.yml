@@ -8,3 +8,12 @@ setono_sylius_trustpilot:
                     label: Enable
                 trustpilot_disable:
                     label: Disable
+        segment:
+            header: Trustpilot
+            order:
+                header: Order
+                emails_sent: Trustpilot emails sent
+            customer:
+                header: Customer
+                limit_reached: Limit reached
+                trustpilot_enabled: Trustpilot enabled

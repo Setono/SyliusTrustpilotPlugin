@@ -1,0 +1,8 @@
+<div class="ui segment" id="trustpilot">
+    <span class="ui blue top attached label">
+        <i class="envelope icon"></i>
+        {{ 'setono_sylius_trustpilot.ui.segment.header'|trans }}
+    </span>
+
+    {{ render(url('setono_sylius_trustpilot_admin_partial_order_trustpilot', { 'id': app.request.get('id') })) }}
+</div>

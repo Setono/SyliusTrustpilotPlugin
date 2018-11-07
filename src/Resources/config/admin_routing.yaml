@@ -1,3 +1,13 @@
+setono_sylius_trustpilot_admin_partial_order_trustpilot:
+    path: /_partial/orders/{id}/trustpilot
+    methods: [GET,POST]
+    defaults:
+        _controller: sylius.controller.customer:trustpilotBlockAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SetonoSyliusTrustpilotPlugin/Order/Partial/_trustpilot.html.twig"
+
 setono_sylius_trustpilot_admin_customer_trustpilot_enable:
     path: /customer/trustpilot/enable
     methods: [GET,POST]

@@ -5,12 +5,42 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\Controller;
 
 use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 trait TrustpilotCustomerTrait
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function trustpilotBlockAction(Request $request): Response
+    {
+        /** @var OrderRepository $orderRepository */
+        $orderRepository = $this->container->get('sylius.repository.order');
+
+        /** @var OrderTrustpilotAwareInterface $order */
+        $order = $orderRepository->find(
+            $request->attributes->get('id')
+        );
+
+        $options = $request->attributes->get('_sylius');
+        Assert::notNull($options['template'], 'Template is not configured.');
+
+        return $this->render(
+            $options['template'],
+            [
+                'order' => $order,
+                'invites_limit' => $this->container->getParameter('setono_sylius_trustpilot.invites_limit'),
+            ]
+        );
+    }
+
     /**
      * @param Request $request
      *
