@@ -5,20 +5,17 @@
 [![Build Status][ico-travis]][link-travis]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
-Plugin for Sylius 1.3 to interate https://trustpilot.com to Sylius.
-
-It sends an follow up emails to users who placed orders to leave 
-feedback at Trustpilot.
+Send follow up emails to your customers to entice them to leave feedback for you. The plugin uses Trustpilots [AFS service](https://support.trustpilot.com/hc/en-us/articles/213703667-Automatic-Feedback-Service-AFS-2-0-setup-guide).
 
 ## Installation
 
-* Add plugin to `composer.json`:
+* Install plugin using `composer`:
 
     ```bash
-    composer require setono/sylius-trustpilot-plugin
+    $ composer require setono/sylius-trustpilot-plugin
     ```
 
-* Require bundle at application's `config/bundles.php`:
+* Add bundle to `config/bundles.php`:
 
     ```php
     <?php
