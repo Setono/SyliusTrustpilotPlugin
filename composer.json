@@ -57,6 +57,7 @@
         "sort-packages": true
     },
     "scripts": {
+        "checks": "composer check-style && composer test && composer analyse",
         "test": "./vendor/bin/phpspec run",
         "check-style": "./vendor/bin/ecs check src",
         "fix-style": "./vendor/bin/ecs check src --fix",
