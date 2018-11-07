@@ -33,7 +33,7 @@ class TrustpilotProcessCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName('setono:sylius-trustpilot:process')
+            ->setName('setono:trustpilot:process')
         ;
     }
 
