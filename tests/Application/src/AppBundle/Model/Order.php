@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AppBundle\Model;
 
-use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrait;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
 /**

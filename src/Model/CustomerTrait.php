@@ -37,7 +37,7 @@ trait CustomerTrait
         /** @var ArrayCollection|OrderTrustpilotAwareInterface[] $orders */
         $orders = $this->getOrders();
 
-        return array_sum($orders->map(function (OrderTrustpilotAwareInterface $order) {
+        return (int)array_sum($orders->map(function (OrderTrustpilotAwareInterface $order) {
             return $order->getTrustpilotEmailsSent();
         })->toArray());
     }
