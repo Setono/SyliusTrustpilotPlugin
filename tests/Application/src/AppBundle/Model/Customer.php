@@ -11,7 +11,7 @@ use Sylius\Component\Core\Model\Customer as BaseCustomer;
 /**
  * Class Customer
  */
-class CustomerTrustpilotAware extends BaseCustomer implements CustomerTrustpilotAwareInterface
+class Customer extends BaseCustomer implements CustomerTrustpilotAwareInterface
 {
     use CustomerTrait;
 }
