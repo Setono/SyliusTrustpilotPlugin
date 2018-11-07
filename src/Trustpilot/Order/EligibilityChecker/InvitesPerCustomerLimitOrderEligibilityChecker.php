@@ -23,6 +23,9 @@ final class InvitesPerCustomerLimitOrderEligibilityChecker implements OrderEligi
     }
 
     /**
+     * Eligible if there are no per customer limit
+     * Eligible if customer received less emails than limit
+     *
      * {@inheritdoc}
      */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
