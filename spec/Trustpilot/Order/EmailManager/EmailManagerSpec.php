@@ -4,14 +4,13 @@ namespace spec\Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager;
 
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 class EmailManagerSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(EmailManager::class);
     }
