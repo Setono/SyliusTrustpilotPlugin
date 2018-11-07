@@ -18,7 +18,6 @@
 
         <service id="setono_sylius_trustpilot.order_eligibility_checker.invites_limit"
                  class="Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\InvitesLimitOrderEligibilityChecker">
-            <argument type="service" id="sylius.repository.order" />
             <argument>%setono_sylius_trustpilot.invites_limit%</argument>
             <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
         </service>

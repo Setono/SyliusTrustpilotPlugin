@@ -7,9 +7,6 @@ namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker;
 use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * Class CompositeOrderEligibilityChecker
- */
 final class CompositeOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
     /**

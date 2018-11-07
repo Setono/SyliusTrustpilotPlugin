@@ -8,9 +8,6 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-/**
- * Class CompositeOrderEligibilityCheckerPass
- */
 final class CompositeOrderEligibilityCheckerPass implements CompilerPassInterface
 {
     /**

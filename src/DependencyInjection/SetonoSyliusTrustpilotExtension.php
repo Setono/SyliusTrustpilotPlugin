@@ -13,6 +13,8 @@ final class SetonoSyliusTrustpilotExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
+     *
+     * @throws \Exception
      */
     public function load(array $config, ContainerBuilder $container): void
     {

@@ -9,9 +9,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class TrustpilotProcessCommand
- */
 class TrustpilotProcessCommand extends Command
 {
     /**
@@ -20,8 +17,6 @@ class TrustpilotProcessCommand extends Command
     protected $trustpilotOrdersProcessor;
 
     /**
-     * TrustpilotProcessCommand constructor.
-     *
      * @param TrustpilotOrdersProcessorInterface $trustpilotOrdersProcessor
      */
     public function __construct(
@@ -35,7 +30,7 @@ class TrustpilotProcessCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('setono:sylius-trustpilot:process')
@@ -45,10 +40,8 @@ class TrustpilotProcessCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $this->trustpilotOrdersProcessor->process();
-
-        $output->writeln('Done');
     }
 }

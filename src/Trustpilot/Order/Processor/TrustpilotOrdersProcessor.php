@@ -33,8 +33,6 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
     private $orderRepository;
 
     /**
-     * TrustpilotOrdersProcessor constructor.
-     *
      * @param PreQualifiedOrdersProviderInterface $preQualifiedOrdersProvider
      * @param OrderEligibilityCheckerInterface $orderEligibilityChecker
      * @param EmailManagerInterface $emailManager

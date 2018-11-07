@@ -8,9 +8,6 @@ use Setono\SyliusTrustpilotPlugin\Model\CustomerInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
-/**
- * Class ClientsTrustpilotEnabledOrderEligibilityChecker
- */
 final class ClientsTrustpilotEnabledOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
     /**

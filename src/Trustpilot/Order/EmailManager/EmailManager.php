@@ -26,8 +26,6 @@ class EmailManager implements EmailManagerInterface
     private $locale;
 
     /**
-     * EmailManager constructor.
-     *
      * @param SenderInterface $emailSender
      * @param string $trustpilotEmail
      * @param string $locale

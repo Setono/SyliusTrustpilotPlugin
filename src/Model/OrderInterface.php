@@ -6,9 +6,6 @@ namespace Setono\SyliusTrustpilotPlugin\Model;
 
 use Sylius\Component\Core\Model\OrderInterface as BaseOrderInterface;
 
-/**
- * Interface OrderInterface
- */
 interface OrderInterface extends BaseOrderInterface
 {
     /**

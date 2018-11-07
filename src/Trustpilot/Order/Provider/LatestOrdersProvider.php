@@ -6,9 +6,6 @@ namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider;
 
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-/**
- * Class LatestOrdersProvider
- */
 class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
 {
     /**
@@ -22,8 +19,6 @@ class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
     protected $latestDays;
 
     /**
-     * LatestOrdersProvider constructor.
-     *
      * @param OrderRepositoryInterface $orderRepository
      * @param int $latestDays
      */
