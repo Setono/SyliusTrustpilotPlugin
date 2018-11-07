@@ -42,7 +42,7 @@ final class Configuration implements ConfigurationInterface
             ->end()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('trustpilot_email')->cannotBeEmpty()->end()
+                ->scalarNode('trustpilot_email')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('process_latest_days')->defaultValue(0)->end()
                 ->scalarNode('send_in_days')->defaultValue(7)->end()
                 ->scalarNode('invites_limit')->defaultValue(0)->end()
