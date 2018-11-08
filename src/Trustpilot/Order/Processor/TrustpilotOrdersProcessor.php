@@ -61,7 +61,7 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
         $preQualifiedOrders = $this->preQualifiedOrdersProvider->getOrders();
         if (null !== $output) {
             $output->writeln(sprintf(
-                "Checking %s order(s)...",
+                'Checking %s order(s)...',
                 count($preQualifiedOrders)
             ));
         }
@@ -72,7 +72,7 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
                     /** @var CustomerInterface $customer */
                     $customer = $order->getCustomer();
                     $output->writeln(sprintf(
-                        "Order #%s is eligible. Sending email to Trustpilot for %s.",
+                        'Order #%s is eligible. Sending email to Trustpilot for %s.',
                         $order->getId(),
                         $customer->getEmail()
                     ));
