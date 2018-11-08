@@ -4,5 +4,3 @@ imports:
 
 setono_sylius_trustpilot:
     trustpilot_email: "%env(APP_TRUSTPILOT_EMAIL)%"
-    send_in_days: 3
-    invites_limit: 2

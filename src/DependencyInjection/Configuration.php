@@ -23,7 +23,11 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->beforeNormalization()
                 ->always(function ($values) {
-                    if ($values['send_in_days'] < 1) {
+                    if (!isset($values['send_in_days'])) {
+                        // We should specify default value here
+                        // as we need it before normalization
+                        $values['send_in_days'] = 7;
+                    } elseif ($values['send_in_days'] < 1) {
                         throw new \InvalidArgumentException("Parameter 'send_in_days' should not be less than 1");
                     }
 
@@ -44,7 +48,7 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('trustpilot_email')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('process_latest_days')->defaultValue(0)->end()
-                ->scalarNode('send_in_days')->defaultValue(7)->end()
+                ->scalarNode('send_in_days')->end()
                 ->scalarNode('invites_limit')->defaultValue(0)->end()
             ->end()
         ;
