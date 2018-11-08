@@ -27,5 +27,11 @@
             <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
         </service>
 
+        <service id="setono_sylius_trustpilot.order_eligibility_checker.checkout_date"
+                 class="Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\CheckoutDateOrderEligibilityChecker">
+            <argument>%setono_sylius_trustpilot.send_in_days%</argument>
+            <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
+        </service>
+
     </services>
 </container>
