@@ -7,6 +7,8 @@ namespace Setono\SyliusTrustpilotPlugin\Controller;
 use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +16,26 @@ use Webmozart\Assert\Assert;
 
 trait TrustpilotCustomerTrait
 {
+    /**
+     * @param string $view
+     * @param array $parameters
+     * @param Response|null $response
+     * @return Response
+     */
+    abstract protected function render(string $view, array $parameters = array(), Response $response = null): Response;
+
+    /**
+     * @param RequestConfiguration $configuration
+     * @param string $permission
+     */
+    abstract protected function isGrantedOr403(RequestConfiguration $configuration, string $permission): void;
+
+    /**
+     * @param RequestConfiguration $configuration
+     * @return ResourceInterface
+     */
+    abstract protected function findOr404(RequestConfiguration $configuration): ResourceInterface;
+
     /**
      * @param Request $request
      *
