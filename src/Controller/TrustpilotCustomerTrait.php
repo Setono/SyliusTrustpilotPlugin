@@ -20,9 +20,10 @@ trait TrustpilotCustomerTrait
      * @param string $view
      * @param array $parameters
      * @param Response|null $response
+     *
      * @return Response
      */
-    abstract protected function render(string $view, array $parameters = array(), Response $response = null): Response;
+    abstract protected function render(string $view, array $parameters = [], Response $response = null): Response;
 
     /**
      * @param RequestConfiguration $configuration
@@ -32,6 +33,7 @@ trait TrustpilotCustomerTrait
 
     /**
      * @param RequestConfiguration $configuration
+     *
      * @return ResourceInterface
      */
     abstract protected function findOr404(RequestConfiguration $configuration): ResourceInterface;
