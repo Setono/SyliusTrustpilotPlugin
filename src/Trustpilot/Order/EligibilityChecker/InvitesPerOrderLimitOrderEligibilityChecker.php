@@ -15,6 +15,6 @@ final class InvitesPerOrderLimitOrderEligibilityChecker implements OrderEligibil
      */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
-        return $order->getTrustpilotEmailsSent() == 0;
+        return $order->getTrustpilotEmailsSent() === 0;
     }
 }

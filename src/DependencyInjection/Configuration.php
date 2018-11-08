@@ -47,14 +47,14 @@ final class Configuration implements ConfigurationInterface
                     return $values;
                 })
             ->end()
-            ->children()
-                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('trustpilot_email')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('process_latest_days')->defaultValue(0)->end()
-                ->scalarNode('send_in_days')->end()
-                ->scalarNode('invites_limit')->defaultValue(0)->end()
-            ->end()
         ;
+
+        $rootNodeChildren = $rootNode->children();
+        $rootNodeChildren->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
+        $rootNodeChildren->scalarNode('trustpilot_email')->isRequired()->cannotBeEmpty();
+        $rootNodeChildren->scalarNode('process_latest_days')->defaultValue(0);
+        $rootNodeChildren->scalarNode('send_in_days');
+        $rootNodeChildren->scalarNode('invites_limit')->defaultValue(0);
 
         return $treeBuilder;
     }
