@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 trait CustomerTrait
 {
@@ -12,6 +13,11 @@ trait CustomerTrait
      * @var bool
      */
     protected $trustpilotEnabled = true;
+
+    /**
+     * @return ArrayCollection|OrderTrustpilotAwareInterface[]
+     */
+    abstract public function getOrders(): Collection;
 
     /**
      * {@inheritdoc}
@@ -34,10 +40,7 @@ trait CustomerTrait
      */
     public function getTrustpilotEmailsSent(): int
     {
-        /** @var ArrayCollection|OrderTrustpilotAwareInterface[] $orders */
-        $orders = $this->getOrders();
-
-        return (int) array_sum($orders->map(function (OrderTrustpilotAwareInterface $order) {
+        return (int) array_sum($this->getOrders()->map(function (OrderTrustpilotAwareInterface $order) {
             return $order->getTrustpilotEmailsSent();
         })->toArray());
     }
