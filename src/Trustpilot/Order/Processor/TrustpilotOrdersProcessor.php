@@ -9,6 +9,8 @@ use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider\PreQualifiedOrdersProviderInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterface
 {
@@ -53,12 +55,29 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
     /**
      * {@inheritdoc}
      */
-    public function process(): void
+    public function process(?OutputInterface $output = null): void
     {
         /** @var OrderTrustpilotAwareInterface[] $preQualifiedOrders */
         $preQualifiedOrders = $this->preQualifiedOrdersProvider->getOrders();
+        if (null !== $output) {
+            $output->writeln(sprintf(
+                "Checking %s order(s)...",
+                count($preQualifiedOrders)
+            ));
+        }
+
         foreach ($preQualifiedOrders as $order) {
             if ($this->orderEligibilityChecker->isEligible($order)) {
+                if (null !== $output) {
+                    /** @var CustomerInterface $customer */
+                    $customer = $order->getCustomer();
+                    $output->writeln(sprintf(
+                        "Order #%s is eligible. Sending email to Trustpilot for %s.",
+                        $order->getId(),
+                        $customer->getEmail()
+                    ));
+                }
+
                 $this->emailManager->sendTrustpilotEmail($order);
 
                 // Increment emails sent for this order

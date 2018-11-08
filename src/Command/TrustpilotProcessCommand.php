@@ -42,6 +42,6 @@ class TrustpilotProcessCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $this->trustpilotOrdersProcessor->process();
+        $this->trustpilotOrdersProcessor->process($output);
     }
 }
