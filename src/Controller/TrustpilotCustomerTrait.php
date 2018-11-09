@@ -1,5 +1,8 @@
 <?php
 
+/** @noinspection PhpInternalEntityUsedInspection */
+/** @noinspection PhpUndefinedMethodInspection */
+
 declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Controller;
@@ -10,12 +13,19 @@ use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
 trait TrustpilotCustomerTrait
 {
+    use ControllerTrait;
+    use ContainerAwareTrait;
+
+    abstract protected function getParameter(string $name);
+
     /**
      * @param string $view
      * @param array $parameters
@@ -60,7 +70,7 @@ trait TrustpilotCustomerTrait
             $options['template'],
             [
                 'order' => $order,
-                'invites_limit' => $this->container->getParameter('setono_sylius_trustpilot.invites_limit'),
+                'invites_limit' => $this->getParameter('setono_sylius_trustpilot.invites_limit'),
             ]
         );
     }
