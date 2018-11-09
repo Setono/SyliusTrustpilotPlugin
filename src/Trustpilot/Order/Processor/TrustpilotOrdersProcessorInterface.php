@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
-use Symfony\Component\Console\Output\OutputInterface;
+use Psr\Log\LoggerAwareInterface;
 
-interface TrustpilotOrdersProcessorInterface
+interface TrustpilotOrdersProcessorInterface extends LoggerAwareInterface
 {
-    public function process(?OutputInterface $output = null): void;
+    public function process(): void;
 }

@@ -7,6 +7,7 @@ namespace Setono\SyliusTrustpilotPlugin\Command;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor\TrustpilotOrdersProcessorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class TrustpilotProcessCommand extends Command
@@ -42,6 +43,7 @@ class TrustpilotProcessCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $this->trustpilotOrdersProcessor->process($output);
+        $this->trustpilotOrdersProcessor->setLogger(new ConsoleLogger($output));
+        $this->trustpilotOrdersProcessor->process();
     }
 }

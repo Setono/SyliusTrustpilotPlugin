@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Psr\Log\LoggerAwareTrait;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider\PreQualifiedOrdersProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * @var PreQualifiedOrdersProviderInterface
      */
@@ -55,12 +57,13 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
     /**
      * {@inheritdoc}
      */
-    public function process(?OutputInterface $output = null): void
+    public function process(): void
     {
         /** @var OrderTrustpilotAwareInterface[] $preQualifiedOrders */
         $preQualifiedOrders = $this->preQualifiedOrdersProvider->getOrders();
-        if (null !== $output) {
-            $output->writeln(sprintf(
+
+        if (null !== $this->logger) {
+            $this->logger->debug(sprintf(
                 'Checking %s order(s)...',
                 count($preQualifiedOrders)
             ));
@@ -68,10 +71,10 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
 
         foreach ($preQualifiedOrders as $order) {
             if ($this->orderEligibilityChecker->isEligible($order)) {
-                if (null !== $output) {
+                if (null !== $this->logger) {
                     /** @var CustomerInterface $customer */
                     $customer = $order->getCustomer();
-                    $output->writeln(sprintf(
+                    $this->logger->debug(sprintf(
                         'Order #%s is eligible. Sending email to Trustpilot for %s.',
                         $order->getId(),
                         $customer->getEmail()
