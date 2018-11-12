@@ -57,9 +57,12 @@
         "sort-packages": true
     },
     "scripts": {
+        "all": [
+            "composer checks",
+            "composer test"
+        ],
         "checks": [
             "composer check-style",
-            "composer test",
             "composer analyse"
         ],
         "test": [
