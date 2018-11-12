@@ -22,3 +22,10 @@ Feature: Order details page shows Trustpilot box
         Then I should see trustpilot box
         And I should see 0 order emails sent
         And I should see 0 customer emails sent
+
+    Scenario: Trustpilot box represents actual amount of sent emails
+        Given order "#00000001" have 1 emails sent
+        When I am viewing the summary of this order
+        Then I should see trustpilot box
+        And I should see 1 order emails sent
+        And I should see 1 customer emails sent

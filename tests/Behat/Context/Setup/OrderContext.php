@@ -6,6 +6,7 @@ namespace Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
@@ -69,6 +70,22 @@ final class OrderContext implements Context
             new \DateTime(sprintf('-%s day', $days))
         );
         $order->setState(OrderInterface::STATE_NEW);
+
+        $this->objectManager->flush();
+        $this->sharedStorage->set('order', $order);
+    }
+
+    /**
+     * @Given (that) order have :emails emails sent
+     * @Given order :order have :emails emails sent
+     */
+    public function orderHaveEmailsSent(int $emails, ?OrderTrustpilotAwareInterface $order = null): void
+    {
+        if (null === $order) {
+            $order = $this->sharedStorage->get('order');
+        }
+
+        $order->setTrustpilotEmailsSent($emails);
 
         $this->objectManager->flush();
         $this->sharedStorage->set('order', $order);
