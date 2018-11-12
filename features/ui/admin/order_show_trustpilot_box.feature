@@ -1,4 +1,4 @@
-@setono_sylius_trustpilot @ui @current
+@setono_sylius_trustpilot @ui
 Feature: Order details page shows Trustpilot box
     In order to see trustpilot-related data at order details page
     As an Administrator
