@@ -7,6 +7,7 @@ namespace Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Cli;
 use Behat\Behat\Context\Context;
 use Setono\SyliusTrustpilotPlugin\Command\TrustpilotProcessCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
@@ -57,7 +58,9 @@ final class CommandsContext implements Context
         );
         $this->tester = new CommandTester($this->trustpilotProcessCommand);
         $this->tester->execute([
-            'command' => $this->trustpilotProcessCommand->getName()
+            'command' => $this->trustpilotProcessCommand->getName(),
+        ], [
+            'verbosity'=>OutputInterface::VERBOSITY_DEBUG,
         ]);
     }
 

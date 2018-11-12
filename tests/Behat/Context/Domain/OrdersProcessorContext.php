@@ -8,7 +8,9 @@ use Behat\Behat\Context\Context;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor\TrustpilotOrdersProcessor;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Symfony\Component\Console\Logger\ConsoleLogger;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\OutputInterface;
 use Webmozart\Assert\Assert;
 
 final class OrdersProcessorContext implements Context
@@ -36,6 +38,10 @@ final class OrdersProcessorContext implements Context
     ) {
         $this->trustpilotOrdersProcessor = $trustpilotOrdersProcessor;
         $this->output = new BufferedOutput();
+        $this->output->setVerbosity(OutputInterface::VERBOSITY_DEBUG);
+        $this->trustpilotOrdersProcessor->setLogger(
+            new ConsoleLogger($this->output)
+        );
     }
 
     /**
@@ -43,7 +49,7 @@ final class OrdersProcessorContext implements Context
      */
     public function ordersProcessorWasExecuted(): void
     {
-        $this->trustpilotOrdersProcessor->process($this->output);
+        $this->trustpilotOrdersProcessor->process();
         $this->lastOutputData = $this->output->fetch();
     }
 
