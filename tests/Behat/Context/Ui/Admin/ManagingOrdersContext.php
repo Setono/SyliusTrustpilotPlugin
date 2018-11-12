@@ -34,6 +34,34 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I click customer trustpilot enabled toggle (again)
+     */
+    public function iClickCustomerTrustpilotEnabledToggle()
+    {
+        $this->showPage->clickCustomerTrustpilotEnabledToggle();
+    }
+
+    /**
+     * @Then I should see customer trustpilot enabled toggle turned on
+     */
+    public function iShouldSeeCustomerTrustpilotEnabledToggleTurnedOn()
+    {
+        Assert::true(
+            $this->showPage->isCustomerTrustpilotEnabledToggleTurnedOn()
+        );
+    }
+
+    /**
+     * @Then I should see customer trustpilot enabled toggle turned off
+     */
+    public function iShouldSeeCustomerTrustpilotEnabledToggleTurnedOff()
+    {
+        Assert::true(
+            $this->showPage->isCustomerTrustpilotEnabledToggleTurnedOff()
+        );
+    }
+
+    /**
      * @Then I should see trustpilot box
      */
     public function iShouldSeeTrustpilotBox()
@@ -42,5 +70,21 @@ final class ManagingOrdersContext implements Context
             $this->showPage->hasTrustpilotBox(),
             "Trustpilot box was not found at order details page"
         );
+    }
+
+    /**
+     * @Then I should see :count order emails sent
+     */
+    public function iShouldSeeOrderEmailsSentCount(int $count)
+    {
+        Assert::eq($count, $this->showPage->getOrderEmailsSentCount());
+    }
+
+    /**
+     * @Then I should see :count customer emails sent
+     */
+    public function iShouldSeeCustomerEmailsSentCount(int $count)
+    {
+        Assert::eq($count, $this->showPage->getCustomerEmailsSentCount());
     }
 }

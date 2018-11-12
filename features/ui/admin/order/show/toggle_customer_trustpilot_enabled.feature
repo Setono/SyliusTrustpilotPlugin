@@ -1,8 +1,8 @@
 @setono_sylius_trustpilot @ui
-Feature: Order details page shows Trustpilot box
-    In order to see trustpilot-related data at order details page
+Feature: Order details page give ability to enable/disable trustpilot for Customer
+    In order to enable/disable trustpilot for Customer
     As an Administrator
-    I want orders details page have trustpilot box
+    I want order details page to have enable/disable toggle
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -17,6 +17,10 @@ Feature: Order details page shows Trustpilot box
 
         And I am logged in as an administrator
 
-    Scenario: An order details contains trustpilot box
-        When I am viewing the summary of this order
-        Then I should see trustpilot box
+    Scenario: Clicking on toggle should revert its state
+        Given I am viewing the summary of this order
+        When I click customer trustpilot enabled toggle
+        Then I should see customer trustpilot enabled toggle turned off
+
+        When I click customer trustpilot enabled toggle again
+        Then I should see customer trustpilot enabled toggle turned on
