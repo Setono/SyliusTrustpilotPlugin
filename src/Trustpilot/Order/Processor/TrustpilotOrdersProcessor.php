@@ -73,7 +73,7 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
                     $customer = $order->getCustomer();
                     $output->writeln(sprintf(
                         'Order #%s is eligible. Sending email to Trustpilot for %s.',
-                        $order->getId(),
+                        $order->getNumber() ?: $order->getId(),
                         $customer->getEmail()
                     ));
                 }
