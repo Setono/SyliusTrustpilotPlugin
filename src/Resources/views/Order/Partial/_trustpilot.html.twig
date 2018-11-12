@@ -1,22 +1,30 @@
 {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
 
 <h3 class="ui dividing header">{{ 'setono_sylius_trustpilot.ui.segment.order.header'|trans }}</h3>
-<div class="ui relaxed divided list" id="sylius-payments">
-    {{ 'setono_sylius_trustpilot.ui.segment.order.emails_sent'|trans }}: {{ order.trustpilotEmailsSent }}
+<div class="ui relaxed divided list" id="setono-trustpilot-order">
+    {{ 'setono_sylius_trustpilot.ui.segment.order.emails_sent'|trans }}:
+    <span id="setono-trustpilot-order-emails-sent">
+        {{ order.trustpilotEmailsSent }}
+    </span>
 </div>
 
 <h3 class="ui dividing header">{{ 'setono_sylius_trustpilot.ui.segment.customer.header'|trans }}</h3>
-<div>
-    {{ 'setono_sylius_trustpilot.ui.segment.customer.limit_reached'|trans }}: {{ order.customer.trustpilotEmailsSent }} / {{ invites_limit }}
-</div>
-<div>
-    {{ 'setono_sylius_trustpilot.ui.segment.customer.trustpilot_enabled'|trans }}:
+<div class="ui relaxed divided list" id="setono-trustpilot-customer">
+    <div>
+        {{ 'setono_sylius_trustpilot.ui.segment.customer.limit_reached'|trans }}:
+        <span id="setono-trustpilot-customer-emails-sent">
+            {{ order.customer.trustpilotEmailsSent }} / {{ invites_limit }}
+        </span>
+    </div>
+    <div>
+        {{ 'setono_sylius_trustpilot.ui.segment.customer.trustpilot_enabled'|trans }}:
 
-    {% if order.customer.trustpilotEnabled %}
-        {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_disable', { 'id': order.customer.id }) %}
-        {{ buttons.default(path, null, null, 'toggle on', 'teal') }}
-    {% else %}
-        {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_enable', { 'id': order.customer.id }) %}
-        {{ buttons.default(path, null, null, 'toggle off', 'gray') }}
-    {% endif %}
+        {% if order.customer.trustpilotEnabled %}
+            {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_disable', { 'id': order.customer.id }) %}
+            {{ buttons.default(path, null, 'setono-trustpilot-customer-enabled-toggle', 'toggle on', 'teal') }}
+        {% else %}
+            {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_enable', { 'id': order.customer.id }) %}
+            {{ buttons.default(path, null, 'setono-trustpilot-customer-enabled-toggle', 'toggle off', 'gray') }}
+        {% endif %}
+    </div>
 </div>

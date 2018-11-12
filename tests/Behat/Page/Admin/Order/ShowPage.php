@@ -23,12 +23,28 @@ class ShowPage extends BaseShowPage
     }
 
     /**
+     * @return int
+     */
+    public function getOrderEmailsSentCount(): int
+    {
+        return (int)$this->getElement('order_emails_sent')->getHtml();
+    }
+
+    /**
+     * @return int
+     */
+    public function getCustomerEmailsSentCount(): int
+    {
+        return (int)$this->getElement('customer_emails_sent')->getHtml();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'trustpilot' => '#trustpilot',
+            'trustpilot' => '#setono-trustpilot',
         ]);
     }
 }
