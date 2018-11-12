@@ -38,7 +38,7 @@ final class OrderContext implements Context
 
     /**
      * @Given (that) order was not completed
-     * @Given (an order "([^"]+)") was not completed
+     * @Given order :order was not completed
      */
     public function orderWasNotCompleted(?OrderInterface $order = null): void
     {
@@ -55,9 +55,9 @@ final class OrderContext implements Context
 
     /**
      * @Given (that) order was completed
-     * @Given (an order "([^"]+)") was completed
+     * @Given order :order was completed
      * @Given (that) order was completed :days days ago
-     * @Given (an order "([^"]+)") was completed :days days ago
+     * @Given order :order was completed :days days ago
      */
     public function orderWasCompletedXDaysAgo(int $days = 0, ?OrderInterface $order = null): void
     {
