@@ -247,6 +247,8 @@ active time of day for your customers, e.g. not at 3:00.
 
 # Contribution
 
+Please run `composer all` to run all checks and tests before making PR or pushing changes to repo.
+
 ## Running plugin tests
 
   - PHPSpec
