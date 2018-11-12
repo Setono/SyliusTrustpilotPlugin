@@ -247,7 +247,27 @@ active time of day for your customers, e.g. not at 3:00.
 
 # Contribution
 
-## Prepare to run test app
+## Running plugin tests
+
+  - PHPSpec
+
+    ```bash
+    $ composer phpspec
+    ```
+
+  - Behat
+
+    ```bash
+    $ composer behat
+    ```
+
+  - All tests (phpspec & behat)
+ 
+    ```bash
+    $ composer test
+    ```
+
+## Prepare to run plugin test app
 
     ```bash
     cp tests/Application/.env.dist tests/Application/.env
@@ -260,7 +280,7 @@ active time of day for your customers, e.g. not at 3:00.
     # set -a && source .env && set +a
     ```
 
-# (Manually) Test plugin
+## Play with plugin test app
 
 - Run application:
   (by default application have default config at `dev` environment
@@ -286,72 +306,6 @@ active time of day for your customers, e.g. not at 3:00.
   Login: sylius@example.com
   Password: sylius 
   ```
-
-- ...
-
-## Running plugin tests
-
-  - PHPUnit
-
-    ```bash
-    $ vendor/bin/phpunit
-    ```
-
-  - PHPSpec
-
-    ```bash
-    $ vendor/bin/phpspec run
-    ```
-
-  - Behat (non-JS scenarios)
-
-    ```bash
-    $ vendor/bin/behat --tags="~@javascript"
-    ```
-
-  - Behat (JS scenarios)
- 
-    1. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/)
-    
-    2. Download [Selenium Standalone Server](https://www.seleniumhq.org/download/).
-    
-    2. Run Selenium server with previously downloaded Chromedriver:
-    
-        ```bash
-        $ java -Dwebdriver.chrome.driver=chromedriver -jar selenium-server-standalone.jar
-        ```
-        
-    3. Run test application's webserver on `localhost:8080`:
-    
-        ```bash
-        $ (cd tests/Application && bin/console server:run localhost:8080 -d public -e test)
-        ```
-    
-    4. Run Behat:
-    
-        ```bash
-        $ vendor/bin/behat --tags="@javascript"
-        ```
-
-### Opening Sylius with your plugin
-
-- Using `test` environment:
-
-    ```bash
-    $ (cd tests/Application && bin/console sylius:fixtures:load -e test)
-    $ (cd tests/Application && bin/console server:run -d public -e test)
-    ```
-    
-- Using `dev` environment:
-
-    ```bash
-    $ (cd tests/Application && bin/console sylius:fixtures:load -e dev)
-    $ (cd tests/Application && bin/console server:run -d public -e dev)
-    ```
-
-# TODO
-
-- Tests
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-trustpilot-plugin.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
