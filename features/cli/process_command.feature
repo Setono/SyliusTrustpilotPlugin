@@ -1,4 +1,4 @@
-@setono_sylius_trustpilot @cli @current
+@setono_sylius_trustpilot @cli
 Feature: Process orders via CLI command
     In order to process orders
     As a Developer
