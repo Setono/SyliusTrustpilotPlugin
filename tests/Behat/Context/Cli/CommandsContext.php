@@ -47,7 +47,7 @@ final class CommandsContext implements Context
     }
 
     /**
-     * @When I run trustpilot process CLI command
+     * @When I run trustpilot process CLI command (again)
      */
     public function iRunTrustpilotProcessCommand(): void
     {

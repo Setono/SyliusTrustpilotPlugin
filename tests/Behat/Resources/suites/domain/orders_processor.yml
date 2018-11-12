@@ -1,6 +1,6 @@
 default:
     suites:
-        setono_sylius_trustpilot_cli:
+        setono_sylius_trustpilot_orders_processor:
             contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
@@ -20,7 +20,9 @@ default:
                 - setono_sylius_trustpilot.behat.context.setup.order
                 - setono_sylius_trustpilot.behat.context.setup.customer
 
-                - setono_sylius_trustpilot.behat.context.cli.commands
+                - setono_sylius_trustpilot.behat.context.domain.orders_processor
+
+                - setono_sylius_trustpilot.behat.context.ui.email
 
             filters:
-                tags: "@setono_sylius_trustpilot && @cli"
+                tags: "@setono_sylius_trustpilot && @orders_processor"

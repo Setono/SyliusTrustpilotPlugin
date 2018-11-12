@@ -36,23 +36,38 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given (that) order was completed
-     * @Given (that) order was completed :days days ago
-     * @Given order :order was completed :days days ago
+     * @Given (that) order was not completed
+     * @Given (an order "([^"]+)") was not completed
      */
-    public function orderWasCompletedXDaysAgo(int $days = 0, ?OrderInterface $order = null): void
+    public function orderWasNotCompleted(?OrderInterface $order = null): void
     {
         if (null === $order) {
             $order = $this->sharedStorage->get('order');
         }
 
-        Assert::greaterThanEq($days, 0, 'You should specify positive amount of days');
-        if ($days > 0) {
-            $order->setCheckoutCompletedAt(
-                new \DateTime(sprintf('-%s day', $days))
-            );
+        $order->setCheckoutCompletedAt(null);
+        $order->setState(OrderInterface::STATE_CART);
+
+        $this->objectManager->flush();
+        $this->sharedStorage->set('order', $order);
+    }
+
+    /**
+     * @Given (that) order was completed
+     * @Given (an order "([^"]+)") was completed
+     * @Given (that) order was completed :days days ago
+     * @Given (an order "([^"]+)") was completed :days days ago
+     */
+    public function orderWasCompletedXDaysAgo(int $days = 0, ?OrderInterface $order = null): void
+    {
+        if (null === $order) {
+            $order = $this->sharedStorage->get('order');
+            Assert::notNull($order, "Order was not found at shared storage");
         }
 
+        $order->setCheckoutCompletedAt(
+            new \DateTime(sprintf('-%s day', $days))
+        );
         $order->setState(OrderInterface::STATE_NEW);
 
         $this->objectManager->flush();

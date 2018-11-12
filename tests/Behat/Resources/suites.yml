@@ -1,2 +1,3 @@
 imports:
     - suites/cli/cli.yml
+    - suites/domain/orders_processor.yml
