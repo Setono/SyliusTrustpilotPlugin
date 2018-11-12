@@ -4,14 +4,14 @@ namespace spec\Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker
 
 use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
-use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\ClientsTrustpilotEnabledOrderEligibilityChecker;
+use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\CustomersTrustpilotEnabledOrderEligibilityChecker;
 use PhpSpec\ObjectBehavior;
 
-class ClientsTrustpilotEnabledOrderEligibilityCheckerSpec extends ObjectBehavior
+class CustomersTrustpilotEnabledOrderEligibilityCheckerSpec extends ObjectBehavior
 {
     public function it_is_initializable(): void
     {
-        $this->shouldHaveType(ClientsTrustpilotEnabledOrderEligibilityChecker::class);
+        $this->shouldHaveType(CustomersTrustpilotEnabledOrderEligibilityChecker::class);
     }
 
     public function it_returns_true_if_client_have_flag_enabled(OrderTrustpilotAwareInterface $order, CustomerTrustpilotAwareInterface $customer): void

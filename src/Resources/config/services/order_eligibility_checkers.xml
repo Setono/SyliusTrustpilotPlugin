@@ -11,8 +11,8 @@
             <argument type="collection" />
         </service>
 
-        <service id="setono_sylius_trustpilot.order_eligibility_checker.clients_trustpilot_enabled"
-                 class="Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\ClientsTrustpilotEnabledOrderEligibilityChecker">
+        <service id="setono_sylius_trustpilot.order_eligibility_checker.customers_trustpilot_enabled"
+                 class="Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\CustomersTrustpilotEnabledOrderEligibilityChecker">
             <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
         </service>
 

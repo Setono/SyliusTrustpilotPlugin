@@ -7,7 +7,7 @@ namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker;
 use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 
-final class ClientsTrustpilotEnabledOrderEligibilityChecker implements OrderEligibilityCheckerInterface
+final class CustomersTrustpilotEnabledOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
     /**
      * {@inheritdoc}
