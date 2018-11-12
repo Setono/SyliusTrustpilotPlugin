@@ -6,5 +6,6 @@
 
     <imports>
         <import resource="services/contexts.xml" />
+        <import resource="services/pages.xml" />
     </imports>
 </container>
