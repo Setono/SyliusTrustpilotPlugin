@@ -7,6 +7,7 @@ use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\InvitesPerCustomerLimitOrderEligibilityChecker;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class InvitesPerCustomerLimitOrderEligibilityCheckerSpec extends ObjectBehavior
 {
@@ -15,9 +16,9 @@ class InvitesPerCustomerLimitOrderEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(InvitesPerCustomerLimitOrderEligibilityChecker::class);
     }
 
-    public function let(): void
+    public function let(OrderRepositoryInterface $orderRepository): void
     {
-        $this->beConstructedWith(0);
+        $this->beConstructedWith($orderRepository, 0);
     }
 
     public function it_returns_true_when_there_is_no_limit(OrderTrustpilotAwareInterface $order): void
@@ -27,35 +28,35 @@ class InvitesPerCustomerLimitOrderEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($order)->shouldReturn(true);
     }
 
-    public function it_returns_true_when_limit_is_not_reached(OrderTrustpilotAwareInterface $order, CustomerTrustpilotAwareInterface $customer): void
+    public function it_returns_true_when_limit_is_not_reached(OrderRepositoryInterface $orderRepository, OrderTrustpilotAwareInterface $order, CustomerTrustpilotAwareInterface $customer): void
     {
         $order->getCustomer()->willReturn($customer);
         $order->getTrustpilotEmailsSent()->willReturn(2);
-        $customer->getOrders()->willReturn(new ArrayCollection([$order->getWrappedObject()]));
+        $orderRepository->findByCustomer($customer)->willReturn([$order->getWrappedObject()]);
 
-        $this->beConstructedWith(3);
+        $this->beConstructedWith($orderRepository, 3);
         $this->isEligible($order)->shouldReturn(true);
     }
 
-    public function it_returns_false_when_limit_is_reached(OrderTrustpilotAwareInterface $order, CustomerTrustpilotAwareInterface $customer): void
+    public function it_returns_false_when_limit_is_reached(OrderRepositoryInterface $orderRepository, OrderTrustpilotAwareInterface $order, CustomerTrustpilotAwareInterface $customer): void
     {
         $order->getCustomer()->willReturn($customer);
         $order->getTrustpilotEmailsSent()->willReturn(3);
-        $customer->getOrders()->willReturn(new ArrayCollection([$order->getWrappedObject()]));
+        $orderRepository->findByCustomer($customer)->willReturn([$order->getWrappedObject()]);
 
-        $this->beConstructedWith(3);
+        $this->beConstructedWith($orderRepository, 3);
         $this->isEligible($order)->shouldReturn(false);
     }
 
-    public function it_returns_false_when_limit_is_reached_on_other_clients_orders(OrderTrustpilotAwareInterface $order, OrderTrustpilotAwareInterface $otherOrder, CustomerTrustpilotAwareInterface $customer): void
+    public function it_returns_false_when_limit_is_reached_on_other_clients_orders(OrderRepositoryInterface $orderRepository, OrderTrustpilotAwareInterface $order, OrderTrustpilotAwareInterface $otherOrder, CustomerTrustpilotAwareInterface $customer): void
     {
         $order->getCustomer()->willReturn($customer);
         $order->getTrustpilotEmailsSent()->willReturn(0);
 
         $otherOrder->getTrustpilotEmailsSent()->willReturn(3);
-        $customer->getOrders()->willReturn(new ArrayCollection([$order->getWrappedObject(), $otherOrder->getWrappedObject()]));
+        $orderRepository->findByCustomer($customer)->willReturn([$order->getWrappedObject(), $otherOrder->getWrappedObject()]);
 
-        $this->beConstructedWith(3);
+        $this->beConstructedWith($orderRepository, 3);
         $this->isEligible($order)->shouldReturn(false);
     }
 }
