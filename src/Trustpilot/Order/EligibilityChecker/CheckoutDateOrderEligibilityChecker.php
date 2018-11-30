@@ -25,6 +25,8 @@ final class CheckoutDateOrderEligibilityChecker implements OrderEligibilityCheck
      * Eligible only when order checkout completed given amount of days ago
      *
      * {@inheritdoc}
+     *
+     * @throws \Exception
      */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
