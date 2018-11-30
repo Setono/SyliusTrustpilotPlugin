@@ -38,7 +38,7 @@ final class Configuration implements ConfigurationInterface
                         $values['process_latest_days'] = $values['send_in_days'] + self::MINIMAL_DAYS_GAP;
                     } elseif ($values['process_latest_days'] - $values['send_in_days'] < self::MINIMAL_DAYS_GAP) {
                         throw new \InvalidArgumentException(sprintf(
-                            "Parameter 'process_latest_days' (%s) should be greater than 'send_in_days' + ".self::MINIMAL_DAYS_GAP.'. Recommended value: %s',
+                            "Parameter 'process_latest_days' (%s) should be greater than 'send_in_days' + " . self::MINIMAL_DAYS_GAP . '. Recommended value: %s',
                             $values['process_latest_days'],
                             $values['send_in_days'] + self::MINIMAL_DAYS_GAP
                         ));
