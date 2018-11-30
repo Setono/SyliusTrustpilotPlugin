@@ -14,8 +14,6 @@ final class CheckoutDateOrderEligibilityChecker implements OrderEligibilityCheck
     private $sendInDays;
 
     /**
-     * CheckoutDateOrderEligibilityChecker constructor.
-     *
      * @param int $sendInDays
      */
     public function __construct(int $sendInDays)
@@ -36,6 +34,6 @@ final class CheckoutDateOrderEligibilityChecker implements OrderEligibilityCheck
 
         $pastDate = new \DateTime(sprintf('-%s day', $this->sendInDays));
 
-        return $order->getCheckoutCompletedAt()->getTimestamp() <= $pastDate->getTimestamp();
+        return $order->getCheckoutCompletedAt() <= $pastDate;
     }
 }
