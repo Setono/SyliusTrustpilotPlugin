@@ -38,13 +38,17 @@ Send follow up emails to your customers to entice them to leave feedback for you
 
 * Override `Customer` and `Order` entities:
 
+    Read the docs regarding [customizing models](https://docs.sylius.com/en/latest/customization/model.html).
+    
+    Here are the plugin specific changes you need to make in order to make this plugin work:
+    
     ```php
     <?php
-    # src/AppBundle/Model/Customer.php
+    // src/Entity/Customer.php
     
     declare(strict_types=1);
     
-    namespace AppBundle\Model;
+    namespace App\Entity;
     
     use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
     use Setono\SyliusTrustpilotPlugin\Model\CustomerTrait;
@@ -64,7 +68,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
                       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                           http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-        <mapped-superclass name="AppBundle\Model\Customer" table="sylius_customer">
+        <mapped-superclass name="App\Entity\Customer" table="sylius_customer">
             <field name="trustpilotEnabled" column="trustpilot_enabled" type="boolean">
                 <options>
                     <option name="default">1</option>
@@ -77,11 +81,11 @@ Send follow up emails to your customers to entice them to leave feedback for you
     
     ```php
     <?php
-    # src/AppBundle/Model/Order.php
+    // src/Entity/Order.php
     
     declare(strict_types=1);
     
-    namespace AppBundle\Model;
+    namespace App\Entity;
     
     use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
     use Setono\SyliusTrustpilotPlugin\Model\OrderTrait;
@@ -102,7 +106,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
                       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                           http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     
-        <mapped-superclass name="AppBundle\Model\Order" table="sylius_order">
+        <mapped-superclass name="App\Entity\Order" table="sylius_order">
             <field name="trustpilotEmailsSent" column="trustpilot_emails_sent" type="smallint">
                 <options>
                     <option name="default">0</option>
@@ -115,7 +119,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
     
     ```php
     <?php
-    # src/AppBundle.php
+    // src/Kernel.php
   
     declare(strict_types=1);
     
@@ -123,21 +127,25 @@ Send follow up emails to your customers to entice them to leave feedback for you
     
     use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
     use Symfony\Component\DependencyInjection\ContainerBuilder;
-    use Symfony\Component\HttpKernel\Bundle\Bundle;
+    use Symfony\Component\HttpKernel\Kernel as BaseKernel;
     
-    final class AppBundle extends Bundle
+    final class Kernel extends BaseKernel
     {
+        // ...
+      
         public function build(ContainerBuilder $container)
         {
             parent::build($container);
     
             $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver(
                 [
-                    realpath(__DIR__ . '/Resources/config/doctrine/model') => 'AppBundle\Model',
+                    realpath(__DIR__ . '/Resources/config/doctrine/model') => 'App\Entity',
                 ],
                 ['doctrine.orm.entity_manager']
             ));
         }
+        
+        // ...
     }
     ```
     
@@ -166,6 +174,8 @@ Send follow up emails to your customers to entice them to leave feedback for you
 * Add plugin configuration:
 
     ```yaml
+    # config/packages/setono_sylius_trustpilot.yml
+  
     setono_sylius_trustpilot:
         # Mandatory.
         # Bcc Trustpilot email from https://businessapp.b2b.trustpilot.com/#/invitations/afs-settings
@@ -240,7 +250,7 @@ active time of day for your customers, e.g. not at 3:00.
 *   Tag it with `setono_sylius_trustpilot.order_eligibility_checker` tag
  
     ```xml
-        <service id="AppBundle\Trustpilot\Order\EligibilityChecker\CustomOrderEligibilityChecker">
+        <service id="App\Trustpilot\Order\EligibilityChecker\CustomOrderEligibilityChecker">
             <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
         </service>
     ```
