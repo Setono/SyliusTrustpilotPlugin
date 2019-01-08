@@ -62,7 +62,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
     
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
-    <!-- src/AppBundle/Resources/config/doctrine/model/Customer.orm.yml -->
+    <!-- config/doctrine/Customer.orm.xml -->
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
@@ -100,7 +100,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
     
     ```xml
     <?xml version="1.0" encoding="UTF-8"?>
-    <!-- src/AppBundle/Resources/config/doctrine/model/Order.orm.yml -->
+    <!-- config/doctrine/Order.orm.xml -->
     <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                       xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
@@ -160,7 +160,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
         resources:
             customer:
                 classes:
-                    model: AppBundle\Model\Customer
+                    model: App\Entity\Customer
                     # If you already have your own CustomerController - use TrustpilotCustomerTrait instead
                     controller: Setono\SyliusTrustpilotPlugin\Controller\CustomerController
                   
@@ -168,7 +168,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
         resources:
             order:
                 classes:
-                    model: AppBundle\Model\Order
+                    model: App\Entity\Order
     ```
     
 * Add plugin configuration:
@@ -183,7 +183,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
 
         # Optional. Default value - 7.
         # How many days after the order was completed Customer's email should be sent to Trustpilot
-        send_in_days: 3
+        send_in_days: 7
 
         # Optional. Default value - send_in_days + 2.
         # If you decrease send_in_days on live project, you should keep
