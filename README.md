@@ -9,13 +9,13 @@ Send follow up emails to your customers to entice them to leave feedback for you
 
 ## Installation
 
-* Install plugin using `composer`:
+### Install plugin using `composer`:
 
     ```bash
     $ composer require setono/sylius-trustpilot-plugin
     ```
 
-* Add bundle to `config/bundles.php`:
+### Add bundle to `config/bundles.php`:
 
     ```php
     <?php
@@ -27,7 +27,7 @@ Send follow up emails to your customers to entice them to leave feedback for you
     ];
     ```
 
-* Add plugin routing to application:
+### Add plugin routing to application:
 
     ```yaml
     # config/routes.yaml
@@ -36,179 +36,142 @@ Send follow up emails to your customers to entice them to leave feedback for you
         prefix: /admin
     ```
 
-* Override `Customer` and `Order` entities:
+### Override `Customer` and `Order` entities:
 
-    Read the docs regarding [customizing models](https://docs.sylius.com/en/latest/customization/model.html).
-    
-    Here are the plugin specific changes you need to make in order to make this plugin work:
-    
-    ```php
-    <?php
-    // src/Entity/Customer.php
-    
-    declare(strict_types=1);
-    
-    namespace App\Entity;
-    
-    use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
-    use Setono\SyliusTrustpilotPlugin\Model\CustomerTrait;
-    use Sylius\Component\Core\Model\Customer as BaseCustomer;
-    
-    class Customer extends BaseCustomer implements CustomerTrustpilotAwareInterface
-    {
-        use CustomerTrait;
-    }
-    ```
-    
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!-- config/doctrine/Customer.orm.xml -->
-    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                          http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    
-        <mapped-superclass name="App\Entity\Customer" table="sylius_customer">
-            <field name="trustpilotEnabled" column="trustpilot_enabled" type="boolean">
-                <options>
-                    <option name="default">1</option>
-                </options>
-            </field>
-        </mapped-superclass>
-    
-    </doctrine-mapping>
-    ```
-    
-    ```php
-    <?php
-    // src/Entity/Order.php
-    
-    declare(strict_types=1);
-    
-    namespace App\Entity;
-    
-    use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
-    use Setono\SyliusTrustpilotPlugin\Model\OrderTrait;
-    use Sylius\Component\Core\Model\Order as BaseOrder;
-    
-    class Order extends BaseOrder implements OrderTrustpilotAwareInterface
-    {
-        use OrderTrait;
-    }
+Read the docs regarding [customizing models](https://docs.sylius.com/en/latest/customization/model.html).
 
-    ```
-    
-    ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <!-- config/doctrine/Order.orm.xml -->
-    <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                      xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                          http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-    
-        <mapped-superclass name="App\Entity\Order" table="sylius_order">
-            <field name="trustpilotEmailsSent" column="trustpilot_emails_sent" type="smallint">
-                <options>
-                    <option name="default">0</option>
-                </options>
-            </field>
-        </mapped-superclass>
-    
-    </doctrine-mapping>
-    ```
-    
-    ```php
-    <?php
-    // src/Kernel.php
-  
-    declare(strict_types=1);
-    
-    namespace AppBundle;
-    
-    use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
-    use Symfony\Component\DependencyInjection\ContainerBuilder;
-    use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-    
-    final class Kernel extends BaseKernel
-    {
-        // ...
-      
-        public function build(ContainerBuilder $container)
-        {
-            parent::build($container);
-    
-            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver(
-                [
-                    realpath(__DIR__ . '/Resources/config/doctrine/model') => 'App\Entity',
-                ],
-                ['doctrine.orm.entity_manager']
-            ));
-        }
-        
-        // ...
-    }
-    ```
-    
-* Add overrides configuration:
+Here are the plugin specific changes you need to make in order to make this plugin work:
 
-    ```yaml
-    # config/packages/_sylius.yml
-    imports:  
-        - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/_sylius.yaml" }
+```php
+<?php
+// src/Entity/Customer.php
+
+namespace App\Entity;
+
+use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
+use Setono\SyliusTrustpilotPlugin\Model\CustomerTrait;
+use Sylius\Component\Core\Model\Customer as BaseCustomer;
+
+class Customer extends BaseCustomer implements CustomerTrustpilotAwareInterface
+{
+    use CustomerTrait;
+}
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- config/doctrine/Customer.orm.xml -->
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="App\Entity\Customer" table="sylius_customer">
+        <field name="trustpilotEnabled" column="trustpilot_enabled" type="boolean">
+            <options>
+                <option name="default">1</option>
+            </options>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>
+```
     
-    sylius_customer:
-        resources:
-            customer:
-                classes:
-                    model: App\Entity\Customer
-                    # If you already have your own CustomerController - use TrustpilotCustomerTrait instead
-                    controller: Setono\SyliusTrustpilotPlugin\Controller\CustomerController
-                  
-    sylius_order:
-        resources:
-            order:
-                classes:
-                    model: App\Entity\Order
-    ```
+```php
+<?php
+// src/Entity/Order.php
+
+namespace App\Entity;
+
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrait;
+use Sylius\Component\Core\Model\Order as BaseOrder;
+
+class Order extends BaseOrder implements OrderTrustpilotAwareInterface
+{
+    use OrderTrait;
+}
+
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- config/doctrine/Order.orm.xml -->
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="App\Entity\Order" table="sylius_order">
+        <field name="trustpilotEmailsSent" column="trustpilot_emails_sent" type="smallint">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+    </mapped-superclass>
+
+</doctrine-mapping>
+```
+### Add overrides configuration:
+
+```yaml
+# config/packages/_sylius.yml
+imports:  
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/_sylius.yaml" }
+
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                model: App\Entity\Customer
+                # If you already have your own CustomerController - use TrustpilotCustomerTrait instead
+                controller: Setono\SyliusTrustpilotPlugin\Controller\CustomerController
+              
+sylius_order:
+    resources:
+        order:
+            classes:
+                model: App\Entity\Order
+```
     
-* Add plugin configuration:
+### Add plugin configuration:
 
-    ```yaml
-    # config/packages/setono_sylius_trustpilot.yml
-  
-    setono_sylius_trustpilot:
-        # Mandatory.
-        # Bcc Trustpilot email from https://businessapp.b2b.trustpilot.com/#/invitations/afs-settings
-        trustpilot_email: "%env(APP_TRUSTPILOT_EMAIL)%"
+```yaml
+# config/packages/setono_sylius_trustpilot.yml
 
-        # Optional. Default value - 7.
-        # How many days after the order was completed Customer's email should be sent to Trustpilot
-        send_in_days: 7
+setono_sylius_trustpilot:
+    # Mandatory.
+    # Bcc Trustpilot email from https://businessapp.b2b.trustpilot.com/#/invitations/afs-settings
+    trustpilot_email: "%env(APP_TRUSTPILOT_EMAIL)%"
 
-        # Optional. Default value - send_in_days + 2.
-        # If you decrease send_in_days on live project, you should keep
-        # process_latest_days old value for more than that amount of days.
-        # For example, if you had send_in_days: 7 and changed to
-        # send_in_days: 3, then you should keep process_latest_days: 9 (7+2)
-        # for at least next 10 days after this change
-        # After 10 days gone, you can remove this parameter from your configuration
-        process_latest_days: 9
+    # Optional. Default value - 7.
+    # How many days after the order was completed Customer's email should be sent to Trustpilot
+    send_in_days: 7
 
-        # Optional. Default value - 0
-        # (meaning that the customer will receive an invite every time he makes an order)
-        # How many invites a Customer should receive before never asking him again
-        invites_limit: 0
-    ```
+    # Optional. Default value - send_in_days + 2.
+    # If you decrease send_in_days on live project, you should keep
+    # process_latest_days old value for more than that amount of days.
+    # For example, if you had send_in_days: 7 and changed to
+    # send_in_days: 3, then you should keep process_latest_days: 9 (7+2)
+    # for at least next 10 days after this change
+    # After 10 days gone, you can remove this parameter from your configuration
+    process_latest_days: 9
 
-* Put environment variable to `.env.dist`, `.env.*.dist` files:
+    # Optional. Default value - 0
+    # (meaning that the customer will receive an invite every time he makes an order)
+    # How many invites a Customer should receive before never asking him again
+    invites_limit: 0
+```
 
-    ```bash
-    ###> setono/sylius-trustpilot-plugin ###
-    APP_TRUSTPILOT_EMAIL=EDITME
-    ###< setono/sylius-trustpilot-plugin ###
-    ```
+### Put environment variable to `.env.dist`, `.env.*.dist` files:
 
-* Update your schema (for existing project)
+```bash
+###> setono/sylius-trustpilot-plugin ###
+APP_TRUSTPILOT_EMAIL=EDITME
+###< setono/sylius-trustpilot-plugin ###
+```
+
+### Update your schema (for existing project)
 
 ```bash
 # Generate and edit migration
@@ -233,27 +196,27 @@ active time of day for your customers, e.g. not at 3:00.
 
 ## Add custom `OrderEligibilityChecker` 
 
-*   Write your custom class implementing `OrderEligibilityCheckerInterface`:
+### Write your custom class implementing `OrderEligibilityCheckerInterface`:
     
-    Lets assume we don't want feedback for order less than $100. 
+Lets assume we don't want feedback for order less than $100. 
 
-    ```php
-    class CustomOrderEligibilityChecker implements OrderEligibilityCheckerInterface
+```php
+class CustomOrderEligibilityChecker implements OrderEligibilityCheckerInterface
+{
+    public function isEligible(OrderInterface $order): bool
     {
-        public function isEligible(OrderInterface $order): bool
-        {
-            return $order->getTotal() >= 10000;
-        }
+        return $order->getTotal() >= 10000;
     }
-    ```
+}
+```
     
-*   Tag it with `setono_sylius_trustpilot.order_eligibility_checker` tag
- 
-    ```xml
-        <service id="App\Trustpilot\Order\EligibilityChecker\CustomOrderEligibilityChecker">
-            <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
-        </service>
-    ```
+### Tag it with `setono_sylius_trustpilot.order_eligibility_checker` tag
+
+```xml
+    <service id="App\Trustpilot\Order\EligibilityChecker\CustomOrderEligibilityChecker">
+        <tag name="setono_sylius_trustpilot.order_eligibility_checker" />
+    </service>
+```
 
 # Contribution
 
@@ -261,20 +224,17 @@ Please run `composer all` to run all checks and tests before making PR or pushin
 
 ## Running plugin tests
 
-  - PHPSpec
-
+- PHPSpec
     ```bash
     $ composer phpspec
     ```
 
-  - Behat
-
+- Behat
     ```bash
     $ composer behat
     ```
 
-  - All tests (phpspec & behat)
- 
+- All tests (phpspec & behat)
     ```bash
     $ composer test
     ```
