@@ -11,30 +11,30 @@ Send follow up emails to your customers to entice them to leave feedback for you
 
 ### Install plugin using `composer`:
 
-    ```bash
-    $ composer require setono/sylius-trustpilot-plugin
-    ```
+```bash
+$ composer require setono/sylius-trustpilot-plugin
+```
 
 ### Add bundle to `config/bundles.php`:
 
-    ```php
-    <?php
-    // config/bundles.php
-    
-    return [
-        // ...
-        Setono\SyliusTrustpilotPlugin\SetonoSyliusTrustpilotPlugin::class => ['all' => true],
-    ];
-    ```
+```php
+<?php
+// config/bundles.php
+
+return [
+    // ...
+    Setono\SyliusTrustpilotPlugin\SetonoSyliusTrustpilotPlugin::class => ['all' => true],
+];
+```
 
 ### Add plugin routing to application:
 
-    ```yaml
-    # config/routes.yaml
-    setono_sylius_trustpilot_admin:
-        resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/admin_routing.yaml"
-        prefix: /admin
-    ```
+```yaml
+# config/routes.yaml
+setono_sylius_trustpilot_admin:
+    resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/admin_routing.yaml"
+    prefix: /admin
+```
 
 ### Override `Customer` and `Order` entities:
 
