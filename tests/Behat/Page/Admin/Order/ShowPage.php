@@ -14,53 +14,39 @@ class ShowPage extends BaseShowPage
         $this->getElement('customer_trustpilot_enabled_toggle')->click();
     }
 
-    /**
-     * @return bool
-     */
     public function isCustomerTrustpilotEnabledToggleTurnedOn(): bool
     {
         return $this->getElement('customer_trustpilot_enabled_toggle_icon')
-            ->hasClass( 'on')
+            ->hasClass('on')
             ;
     }
 
-    /**
-     * @return bool
-     */
     public function isCustomerTrustpilotEnabledToggleTurnedOff(): bool
     {
         return $this->getElement('customer_trustpilot_enabled_toggle_icon')
-            ->hasClass( 'off')
+            ->hasClass('off')
             ;
     }
 
-    /**
-     * @return bool
-     */
     public function hasTrustpilotBox(): bool
     {
         try {
             $this->getElement('trustpilot');
+
             return true;
         } catch (ElementNotFoundException $e) {
             return false;
         }
     }
 
-    /**
-     * @return int
-     */
     public function getOrderEmailsSentCount(): int
     {
-        return (int)$this->getElement('order_emails_sent')->getHtml();
+        return (int) $this->getElement('order_emails_sent')->getHtml();
     }
 
-    /**
-     * @return int
-     */
     public function getCustomerEmailsSentCount(): int
     {
-        return (int)$this->getElement('customer_emails_sent')->getHtml();
+        return (int) $this->getElement('customer_emails_sent')->getHtml();
     }
 
     protected function getDefinedElements(): array

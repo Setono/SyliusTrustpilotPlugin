@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker;
 
 use Safe\DateTime;
-use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use function Safe\sprintf;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 
 final class CheckoutDateOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {

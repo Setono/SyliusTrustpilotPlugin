@@ -1,7 +1,7 @@
 default:
     suites:
         setono_sylius_trustpilot_orders_processor:
-            contexts_services:
+            contexts:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 

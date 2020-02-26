@@ -7,12 +7,13 @@ namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 use Doctrine\ORM\EntityManager;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
+use function Safe\sprintf;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider\PreQualifiedOrdersProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use function Safe\sprintf;
+use Webmozart\Assert\Assert;
 
 final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterface
 {
@@ -56,8 +57,10 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
 
         foreach ($preQualifiedOrders as $order) {
             if ($this->orderEligibilityChecker->isEligible($order)) {
-                /** @var CustomerInterface $customer */
+                /** @var CustomerInterface|null $customer */
                 $customer = $order->getCustomer();
+                Assert::notNull($customer);
+
                 $this->logger->info(sprintf(
                     'Order #%s is eligible. Sending email to Trustpilot for %s.',
                     null !== $order->getNumber() ? $order->getNumber() : $order->getId(),

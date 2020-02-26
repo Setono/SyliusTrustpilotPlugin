@@ -14,30 +14,20 @@ use Webmozart\Assert\Assert;
 
 final class CommandsContext implements Context
 {
-    /**
-     * @var KernelInterface
-     */
+    /** @var KernelInterface */
     private $kernel;
 
-    /**
-     * @var Application
-     */
+    /** @var Application */
     private $application;
 
-    /**
-     * @var CommandTester
-     */
+    /** @var CommandTester */
     private $tester;
 
-    /**
-     * @var TrustpilotProcessCommand
-     */
+    /** @var TrustpilotProcessCommand */
     private $trustpilotProcessCommand;
 
     /**
      * CommandsContext constructor.
-     * @param KernelInterface $kernel
-     * @param TrustpilotProcessCommand $trustpilotProcessCommand
      */
     public function __construct(
         KernelInterface $kernel,
@@ -60,7 +50,7 @@ final class CommandsContext implements Context
         $this->tester->execute([
             'command' => $this->trustpilotProcessCommand->getName(),
         ], [
-            'verbosity'=>OutputInterface::VERBOSITY_DEBUG,
+            'verbosity' => OutputInterface::VERBOSITY_DEBUG,
         ]);
     }
 

@@ -12,26 +12,15 @@ use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var EmailCheckerInterface
-     */
+    /** @var EmailCheckerInterface */
     private $emailChecker;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $trustpilotEmail;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param EmailCheckerInterface $emailChecker
-     * @param string $trustpilotEmail
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         EmailCheckerInterface $emailChecker,
@@ -54,7 +43,7 @@ final class EmailContext implements Context
         }
 
         Assert::true($this->emailChecker->hasRecipient($this->trustpilotEmail));
-        $this->assertEmailContainsMessageTo((string)$order->getId(), $this->trustpilotEmail);
+        $this->assertEmailContainsMessageTo((string) $order->getId(), $this->trustpilotEmail);
     }
 
     /**

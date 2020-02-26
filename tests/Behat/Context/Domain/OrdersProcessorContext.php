@@ -15,24 +15,15 @@ use Webmozart\Assert\Assert;
 
 final class OrdersProcessorContext implements Context
 {
-    /**
-     * @var TrustpilotOrdersProcessor
-     */
+    /** @var TrustpilotOrdersProcessor */
     private $trustpilotOrdersProcessor;
 
-    /**
-     * @var BufferedOutput
-     */
+    /** @var BufferedOutput */
     private $output;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $lastOutputData;
 
-    /**
-     * @param TrustpilotOrdersProcessor $trustpilotOrdersProcessor
-     */
     public function __construct(
         TrustpilotOrdersProcessor $trustpilotOrdersProcessor
     ) {
@@ -116,5 +107,4 @@ final class OrdersProcessorContext implements Context
             $customer->getEmail()
         ));
     }
-
 }

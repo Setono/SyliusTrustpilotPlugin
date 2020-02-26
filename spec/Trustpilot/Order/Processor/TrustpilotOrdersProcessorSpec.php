@@ -3,12 +3,15 @@
 namespace spec\Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
+use Prophecy\Argument;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor\TrustpilotOrdersProcessor;
 use PhpSpec\ObjectBehavior;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider\PreQualifiedOrdersProviderInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 class TrustpilotOrdersProcessorSpec extends ObjectBehavior
 {
@@ -21,7 +24,7 @@ class TrustpilotOrdersProcessorSpec extends ObjectBehavior
         PreQualifiedOrdersProviderInterface $preQualifiedOrdersProvider,
         OrderEligibilityCheckerInterface $orderEligibilityChecker,
         EmailManagerInterface $emailManager,
-        ObjectManager $orderManager
+        EntityManager $orderManager
     ): void {
         $this->beConstructedWith($preQualifiedOrdersProvider, $orderEligibilityChecker, $emailManager, $orderManager);
     }
@@ -31,9 +34,12 @@ class TrustpilotOrdersProcessorSpec extends ObjectBehavior
         OrderEligibilityCheckerInterface $orderEligibilityChecker,
         EmailManagerInterface $emailManager,
         ObjectManager $orderManager,
-        OrderTrustpilotAwareInterface $order
+        OrderTrustpilotAwareInterface $order,
+        CustomerInterface $customer
     ): void {
         $orderEligibilityChecker->isEligible($order)->willReturn(true);
+        $order->getNumber()->willReturn(Argument::any());
+        $order->getCustomer()->willReturn($customer);
         $preQualifiedOrdersProvider->getOrders()->willReturn([$order]);
         $order->getTrustpilotEmailsSent()->willReturn(10);
 

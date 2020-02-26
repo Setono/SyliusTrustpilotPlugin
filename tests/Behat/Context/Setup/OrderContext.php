@@ -13,20 +13,14 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $objectManager;
 
     /**
      * OrderContext constructor.
-     * @param SharedStorageInterface $sharedStorage
-     * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -63,7 +57,7 @@ final class OrderContext implements Context
     {
         if (null === $order) {
             $order = $this->sharedStorage->get('order');
-            Assert::notNull($order, "Order was not found at shared storage");
+            Assert::notNull($order, 'Order was not found at shared storage');
         }
 
         $order->setCheckoutCompletedAt(

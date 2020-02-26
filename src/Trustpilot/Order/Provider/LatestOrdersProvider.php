@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider;
 
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Safe\DateTime;
 use function Safe\sprintf;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
 {

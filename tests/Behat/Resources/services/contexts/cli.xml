@@ -9,9 +9,8 @@
 
         <service id="setono_sylius_trustpilot.behat.context.cli.commands"
                  class="Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Cli\CommandsContext">
-            <argument type="service" id="__symfony__.kernel" />
-            <argument type="service" id="__symfony__.setono_sylius_trustpilot.command.process" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="kernel" />
+            <argument type="service" id="setono_sylius_trustpilot.command.process" />
         </service>
     </services>
 </container>

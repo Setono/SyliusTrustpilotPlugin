@@ -24,11 +24,6 @@ trait TrustpilotCustomerTrait
 
     abstract protected function getParameter(string $name);
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function trustpilotBlockAction(Request $request): Response
     {
         /** @var OrderRepository $orderRepository */
@@ -51,11 +46,6 @@ trait TrustpilotCustomerTrait
         );
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function trustpilotEnableAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -70,11 +60,6 @@ trait TrustpilotCustomerTrait
         return $this->redirectHandler->redirectToReferer($configuration);
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
     public function trustpilotDisableAction(Request $request): Response
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

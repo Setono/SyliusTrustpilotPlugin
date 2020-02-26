@@ -9,8 +9,7 @@
 
         <service id="setono_sylius_trustpilot.behat.context.domain.orders_processor"
                  class="Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Domain\OrdersProcessorContext">
-            <argument type="service" id="__symfony__.setono_sylius_trustpilot.orders_processor" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="setono_sylius_trustpilot.orders_processor" />
         </service>
     </services>
 </container>

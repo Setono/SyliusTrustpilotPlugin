@@ -10,15 +10,13 @@
         <service id="setono_sylius_trustpilot.behat.context.setup.order"
                  class="Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Setup\OrderContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="setono_sylius_trustpilot.behat.context.setup.customer"
                  class="Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Setup\CustomerContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
-            <tag name="fob.context_service" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
     </services>

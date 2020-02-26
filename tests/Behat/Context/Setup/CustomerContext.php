@@ -12,20 +12,14 @@ use Webmozart\Assert\Assert;
 
 final class CustomerContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager */
     private $customerManager;
 
     /**
      * CustomerContext constructor.
-     * @param SharedStorageInterface $sharedStorage
-     * @param ObjectManager $customerManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -43,7 +37,7 @@ final class CustomerContext implements Context
     {
         if (null == $customer) {
             $customer = $this->sharedStorage->get('customer');
-            Assert::notNull($customer, "Customer was not found at shared storage");
+            Assert::notNull($customer, 'Customer was not found at shared storage');
         }
 
         $customer->setTrustpilotEnabled(false);
@@ -58,7 +52,7 @@ final class CustomerContext implements Context
     {
         if (null == $customer) {
             $customer = $this->sharedStorage->get('customer');
-            Assert::notNull($customer, "Customer was not found at shared storage");
+            Assert::notNull($customer, 'Customer was not found at shared storage');
         }
 
         $customer->setTrustpilotEnabled(true);
