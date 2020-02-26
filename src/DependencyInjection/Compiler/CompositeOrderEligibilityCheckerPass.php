@@ -10,14 +10,11 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class CompositeOrderEligibilityCheckerPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         $container->getDefinition('setono_sylius_trustpilot.order_eligibility_checker')->setArguments([
             array_map(
-                function ($id) {
+                static function (string $id): Reference {
                     return new Reference($id);
                 },
                 array_keys($container->findTaggedServiceIds('setono_sylius_trustpilot.order_eligibility_checker'))

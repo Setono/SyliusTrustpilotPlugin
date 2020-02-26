@@ -9,9 +9,7 @@ use Webmozart\Assert\Assert;
 
 final class CompositeOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
-    /**
-     * @var OrderEligibilityCheckerInterface[]
-     */
+    /** @var OrderEligibilityCheckerInterface[] */
     private $orderEligibilityCheckers;
 
     /**
@@ -25,9 +23,6 @@ final class CompositeOrderEligibilityChecker implements OrderEligibilityCheckerI
         $this->orderEligibilityCheckers = $orderEligibilityCheckers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
         foreach ($this->orderEligibilityCheckers as $orderEligibilityChecker) {

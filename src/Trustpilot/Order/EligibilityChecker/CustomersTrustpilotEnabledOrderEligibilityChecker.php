@@ -9,9 +9,6 @@ use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 
 final class CustomersTrustpilotEnabledOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
         /** @var CustomerTrustpilotAwareInterface $customer */

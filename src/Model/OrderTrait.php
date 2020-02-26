@@ -7,21 +7,17 @@ namespace Setono\SyliusTrustpilotPlugin\Model;
 trait OrderTrait
 {
     /**
+     * @ORM\Column(name="trustpilot_emails_sent", type="smallint", nullable=false, options={"default": 0})
+     *
      * @var int
      */
     protected $trustpilotEmailsSent = 0;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTrustpilotEmailsSent(): int
     {
         return $this->trustpilotEmailsSent;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTrustpilotEmailsSent(int $trustpilotEmailsSent): void
     {
         $this->trustpilotEmailsSent = $trustpilotEmailsSent;

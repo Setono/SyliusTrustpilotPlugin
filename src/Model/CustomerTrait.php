@@ -6,10 +6,13 @@ namespace Setono\SyliusTrustpilotPlugin\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 trait CustomerTrait
 {
     /**
+     * @ORM\Column(name="trustpilot_enabled", type="boolean", options={"default": 1})
+     *
      * @var bool
      */
     protected $trustpilotEnabled = true;
@@ -19,25 +22,16 @@ trait CustomerTrait
      */
     abstract public function getOrders(): Collection;
 
-    /**
-     * {@inheritdoc}
-     */
     public function isTrustpilotEnabled(): bool
     {
         return $this->trustpilotEnabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTrustpilotEnabled(bool $trustpilotEnabled): void
     {
         $this->trustpilotEnabled = $trustpilotEnabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTrustpilotEmailsSent(): int
     {
         return (int) array_sum($this->getOrders()->map(function (OrderTrustpilotAwareInterface $order) {

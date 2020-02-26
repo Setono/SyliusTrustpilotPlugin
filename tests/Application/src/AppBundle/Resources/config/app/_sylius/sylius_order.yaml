@@ -1,5 +1,0 @@
-sylius_order:
-    resources:
-        order:
-            classes:
-                model: AppBundle\Model\Order

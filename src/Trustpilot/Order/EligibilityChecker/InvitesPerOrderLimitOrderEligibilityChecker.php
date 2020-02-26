@@ -10,8 +10,6 @@ final class InvitesPerOrderLimitOrderEligibilityChecker implements OrderEligibil
 {
     /**
      * Eligible only when no emails was sent for this order
-     *
-     * {@inheritdoc}
      */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {

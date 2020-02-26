@@ -8,13 +8,7 @@ use Sylius\Component\Core\Model\OrderInterface as BaseOrderInterface;
 
 interface OrderTrustpilotAwareInterface extends BaseOrderInterface
 {
-    /**
-     * @return int
-     */
     public function getTrustpilotEmailsSent(): int;
 
-    /**
-     * @param int $trustpilotEmailsSent
-     */
     public function setTrustpilotEmailsSent(int $trustpilotEmailsSent): void;
 }

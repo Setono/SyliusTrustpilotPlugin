@@ -63,9 +63,6 @@ class ShowPage extends BaseShowPage
         return (int)$this->getElement('customer_emails_sent')->getHtml();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements(): array
     {
         return array_merge(parent::getDefinedElements(), [

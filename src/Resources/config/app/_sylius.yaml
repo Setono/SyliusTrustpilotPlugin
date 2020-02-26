@@ -1,4 +1,0 @@
-imports:
-    - { resource: _sylius/sylius_mailer.yaml }
-    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/grids/order.yaml" }
-    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/grids/customer.yaml" }

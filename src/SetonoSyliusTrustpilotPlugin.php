@@ -16,9 +16,6 @@ final class SetonoSyliusTrustpilotPlugin extends AbstractResourceBundle
 {
     use SyliusPluginTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSupportedDrivers(): array
     {
         return [
@@ -26,9 +23,6 @@ final class SetonoSyliusTrustpilotPlugin extends AbstractResourceBundle
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);

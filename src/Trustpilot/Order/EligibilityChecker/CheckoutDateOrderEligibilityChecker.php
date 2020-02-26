@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker;
 
+use Safe\DateTime;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
+use function Safe\sprintf;
 
 final class CheckoutDateOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $sendInDays;
 
-    /**
-     * @param int $sendInDays
-     */
     public function __construct(int $sendInDays)
     {
         $this->sendInDays = $sendInDays;
@@ -23,10 +20,6 @@ final class CheckoutDateOrderEligibilityChecker implements OrderEligibilityCheck
 
     /**
      * Eligible only when order checkout completed given amount of days ago
-     *
-     * {@inheritdoc}
-     *
-     * @throws \Exception
      */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
@@ -34,7 +27,7 @@ final class CheckoutDateOrderEligibilityChecker implements OrderEligibilityCheck
             return false;
         }
 
-        $pastDate = new \DateTime(sprintf('-%s day', $this->sendInDays));
+        $pastDate = new DateTime(sprintf('-%s day', $this->sendInDays));
 
         return $order->getCheckoutCompletedAt() <= $pastDate;
     }

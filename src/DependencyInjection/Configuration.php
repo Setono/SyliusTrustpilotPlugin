@@ -13,15 +13,12 @@ final class Configuration implements ConfigurationInterface
 {
     private const MINIMAL_DAYS_GAP = 2;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder('setono_sylius_trustpilot');
 
         /** @var ArrayNodeDefinition $rootNode */
-        $rootNode = $treeBuilder->root('setono_sylius_trustpilot');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->addDefaultsIfNotSet()
             ->beforeNormalization()

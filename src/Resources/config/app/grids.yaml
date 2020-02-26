@@ -1,0 +1,3 @@
+imports:
+    - { resource: "../grids/sylius_admin_order.yaml" }
+    - { resource: "../grids/sylius_admin_customer.yaml" }

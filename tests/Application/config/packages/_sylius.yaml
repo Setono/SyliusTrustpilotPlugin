@@ -6,8 +6,8 @@ imports:
 
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
 
-    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/_sylius.yaml" }
-    - { resource: "@AppBundle/Resources/config/app/_sylius.yaml" }
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/config.yaml" }
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/fixtures.yaml" }
 
 parameters:
     sylius_core.public_dir: '%kernel.project_dir%/public'
@@ -15,3 +15,16 @@ parameters:
 sylius_shop:
     product_grid:
         include_all_descendants: true
+
+sylius_order:
+    resources:
+        order:
+            classes:
+                model: Tests\Setono\SyliusTrustpilotPlugin\Application\Entity\Order
+
+sylius_customer:
+    resources:
+        customer:
+            classes:
+                model: Tests\Setono\SyliusTrustpilotPlugin\Application\Entity\Customer
+                controller: Setono\SyliusTrustpilotPlugin\Controller\CustomerController

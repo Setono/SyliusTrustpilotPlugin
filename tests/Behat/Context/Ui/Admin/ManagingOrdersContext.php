@@ -21,10 +21,6 @@ final class ManagingOrdersContext implements Context
      */
     private $showPage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ShowPage $showPage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ShowPage $showPage
