@@ -1,0 +1,10 @@
+sonata_block:
+    blocks:
+        sonata.block.service.template:
+            settings:
+                app: ~
+                event: ~
+                sonata_block: ~
+                sylius: ~
+                sylius_base_locale: ~
+                sylius_meta: ~

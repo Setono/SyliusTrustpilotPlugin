@@ -8,18 +8,9 @@ use Sylius\Component\Core\Model\CustomerInterface as BaseCustomerInterface;
 
 interface CustomerTrustpilotAwareInterface extends BaseCustomerInterface
 {
-    /**
-     * @return bool
-     */
     public function isTrustpilotEnabled(): bool;
 
-    /**
-     * @param bool $trustpilotEnabled
-     */
     public function setTrustpilotEnabled(bool $trustpilotEnabled): void;
 
-    /**
-     * @return int
-     */
     public function getTrustpilotEmailsSent(): int;
 }

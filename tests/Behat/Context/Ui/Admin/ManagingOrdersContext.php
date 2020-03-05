@@ -11,20 +11,12 @@ use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    /**
-     * @var SharedStorageInterface
-     */
+    /** @var SharedStorageInterface */
     private $sharedStorage;
 
-    /**
-     * @var ShowPage
-     */
+    /** @var ShowPage */
     private $showPage;
 
-    /**
-     * @param SharedStorageInterface $sharedStorage
-     * @param ShowPage $showPage
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ShowPage $showPage
@@ -68,7 +60,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::true(
             $this->showPage->hasTrustpilotBox(),
-            "Trustpilot box was not found at order details page"
+            'Trustpilot box was not found at order details page'
         );
     }
 

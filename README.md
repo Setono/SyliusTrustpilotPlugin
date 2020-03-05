@@ -30,7 +30,7 @@ return [
 ### Add plugin routing to application:
 
 ```yaml
-# config/routes.yaml
+# config/routes/setono_sylius_trustpilot.yaml
 setono_sylius_trustpilot_admin:
     resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/admin_routing.yaml"
     prefix: /admin
@@ -48,76 +48,49 @@ Here are the plugin specific changes you need to make in order to make this plug
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
-use Setono\SyliusTrustpilotPlugin\Model\CustomerTrait;
+use Setono\SyliusTrustpilotPlugin\Model\CustomerTrait as TrustpilotCustomerTrait;
 use Sylius\Component\Core\Model\Customer as BaseCustomer;
 
+/**
+ * @ORM\Table(name="sylius_customer")
+ * @ORM\Entity()
+ */
 class Customer extends BaseCustomer implements CustomerTrustpilotAwareInterface
 {
-    use CustomerTrait;
+    use TrustpilotCustomerTrait;
 }
 ```
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- config/doctrine/Customer.orm.xml -->
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
-    <mapped-superclass name="App\Entity\Customer" table="sylius_customer">
-        <field name="trustpilotEnabled" column="trustpilot_enabled" type="boolean">
-            <options>
-                <option name="default">1</option>
-            </options>
-        </field>
-    </mapped-superclass>
-
-</doctrine-mapping>
-```
-    
 ```php
 <?php
 // src/Entity/Order.php
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
-use Setono\SyliusTrustpilotPlugin\Model\OrderTrait;
+use Setono\SyliusTrustpilotPlugin\Model\OrderTrait as TrustpilotOrderTrait;
 use Sylius\Component\Core\Model\Order as BaseOrder;
 
+/**
+ * @ORM\Table(name="sylius_order")
+ * @ORM\Entity()
+ */
 class Order extends BaseOrder implements OrderTrustpilotAwareInterface
 {
-    use OrderTrait;
+    use TrustpilotOrderTrait;
 }
 
 ```
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- config/doctrine/Order.orm.xml -->
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
-    <mapped-superclass name="App\Entity\Order" table="sylius_order">
-        <field name="trustpilotEmailsSent" column="trustpilot_emails_sent" type="smallint">
-            <options>
-                <option name="default">0</option>
-            </options>
-        </field>
-    </mapped-superclass>
-
-</doctrine-mapping>
-```
 ### Add overrides configuration:
 
 ```yaml
-# config/packages/_sylius.yml
+# config/packages/setono_sylius_trustpilot.yml
 imports:  
-    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/_sylius.yaml" }
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/config.yaml" }
 
 sylius_customer:
     resources:
@@ -163,7 +136,7 @@ setono_sylius_trustpilot:
     invites_limit: 0
 ```
 
-### Put environment variable to `.env.dist`, `.env.*.dist` files:
+### Put environment variable to `.env`
 
 ```bash
 ###> setono/sylius-trustpilot-plugin ###
@@ -238,46 +211,6 @@ Please run `composer all` to run all checks and tests before making PR or pushin
     ```bash
     $ composer test
     ```
-
-## Prepare to run plugin test app
-
-    ```bash
-    cp tests/Application/.env.dist tests/Application/.env
-    
-    # Put actual values to environment variables
-    nano tests/Application/.env
-    
-    set -a && source tests/Application/.env && set +a
-    # OR (from tests/Application directory)
-    # set -a && source .env && set +a
-    ```
-
-## Play with plugin test app
-
-- Run application:
-  (by default application have default config at `dev` environment
-  and example config from `Configure plugin` step at `prod` environment)
-  
-    ```bash
-    SYMFONY_ENV=dev
-    cd tests/Application && \
-        yarn install && \
-        yarn run gulp && \
-        bin/console assets:install public -e $SYMFONY_ENV && \
-        bin/console doctrine:database:drop --force -e $SYMFONY_ENV && \
-        bin/console doctrine:database:create -e $SYMFONY_ENV && \
-        bin/console doctrine:schema:create -e $SYMFONY_ENV && \
-        bin/console sylius:fixtures:load --no-interaction -e $SYMFONY_ENV && \
-        bin/console server:run -d public -e $SYMFONY_ENV
-    ```
-
-- Log in at `http://localhost:8000/admin`
-  with Sylius demo credentials:
-  
-  ```
-  Login: sylius@example.com
-  Password: sylius 
-  ```
 
 [ico-version]: https://img.shields.io/packagist/v/setono/sylius-trustpilot-plugin.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square

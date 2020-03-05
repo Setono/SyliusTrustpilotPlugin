@@ -1,7 +1,0 @@
-imports:
-    - { resource: _sylius/sylius_customer.yaml }
-    - { resource: _sylius/sylius_order.yaml }
-
-setono_sylius_trustpilot:
-    trustpilot_email: "%env(APP_TRUSTPILOT_EMAIL)%"
-    invites_limit: 1

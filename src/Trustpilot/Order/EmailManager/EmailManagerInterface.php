@@ -8,8 +8,5 @@ use Sylius\Component\Core\Model\OrderInterface;
 
 interface EmailManagerInterface
 {
-    /**
-     * @param OrderInterface $order
-     */
     public function sendTrustpilotEmail(OrderInterface $order): void;
 }

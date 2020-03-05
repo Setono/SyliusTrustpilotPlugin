@@ -1,0 +1,9 @@
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                setono_sylius_trustpilot_shop_user:
+                    options:
+                        random: 5
+                        prototype:
+                            trustpilot_enabled: false

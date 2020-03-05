@@ -12,14 +12,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TrustpilotProcessCommand extends Command
 {
-    /**
-     * @var TrustpilotOrdersProcessorInterface
-     */
+    protected static $defaultName = 'setono:trustpilot:process';
+
+    /** @var TrustpilotOrdersProcessorInterface */
     protected $trustpilotOrdersProcessor;
 
-    /**
-     * @param TrustpilotOrdersProcessorInterface $trustpilotOrdersProcessor
-     */
     public function __construct(
         TrustpilotOrdersProcessorInterface $trustpilotOrdersProcessor
     ) {
@@ -28,22 +25,11 @@ class TrustpilotProcessCommand extends Command
         parent::__construct(null);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure(): void
-    {
-        $this
-            ->setName('setono:trustpilot:process')
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->trustpilotOrdersProcessor->setLogger(new ConsoleLogger($output));
         $this->trustpilotOrdersProcessor->process();
+
+        return 0;
     }
 }

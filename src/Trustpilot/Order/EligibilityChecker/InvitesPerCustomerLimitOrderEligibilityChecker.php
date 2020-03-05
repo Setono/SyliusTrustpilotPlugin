@@ -10,20 +10,12 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class InvitesPerCustomerLimitOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
-    /**
-     * @var OrderRepositoryInterface
-     */
+    /** @var OrderRepositoryInterface */
     private $orderRepository;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $limit;
 
-    /**
-     * @param OrderRepositoryInterface $orderRepository
-     * @param int $limit
-     */
     public function __construct(
         OrderRepositoryInterface $orderRepository,
         int $limit
@@ -35,12 +27,10 @@ final class InvitesPerCustomerLimitOrderEligibilityChecker implements OrderEligi
     /**
      * Eligible if there are no per customer limit
      * Eligible if customer received less emails than limit
-     *
-     * {@inheritdoc}
      */
     public function isEligible(OrderTrustpilotAwareInterface $order): bool
     {
-        if (!$this->limit) {
+        if (0 === $this->limit) {
             return true;
         }
 
@@ -50,7 +40,7 @@ final class InvitesPerCustomerLimitOrderEligibilityChecker implements OrderEligi
         /** @var OrderTrustpilotAwareInterface[] $orders */
         $orders = $this->orderRepository->findByCustomer($customer);
 
-        return array_sum(array_map(function (OrderTrustpilotAwareInterface $order) {
+        return array_sum(array_map(static function (OrderTrustpilotAwareInterface $order): int {
             return $order->getTrustpilotEmailsSent();
         }, $orders)) < $this->limit;
     }
