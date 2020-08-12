@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Model;
 
+use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @mixin CustomerInterface

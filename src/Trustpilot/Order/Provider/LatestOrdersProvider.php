@@ -11,10 +11,10 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 final class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
 {
     /** @var OrderRepositoryInterface */
-    protected $orderRepository;
+    private $orderRepository;
 
     /** @var int */
-    protected $latestDays;
+    private $latestDays;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

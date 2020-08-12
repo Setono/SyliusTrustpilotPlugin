@@ -14,7 +14,6 @@ final class CompositeOrderEligibilityCheckerPass implements CompilerPassInterfac
     {
         $container->getDefinition('setono_sylius_trustpilot.order_eligibility_checker')->setArguments([
             array_map(
-                static function ($id): Reference {
                 static function (string $id): Reference {
                     return new Reference($id);
                 },

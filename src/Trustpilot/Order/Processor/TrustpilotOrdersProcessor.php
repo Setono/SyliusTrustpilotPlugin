@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareTrait;
-use function Safe\sprintf;
 use Psr\Log\NullLogger;
 use function Safe\sprintf;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
