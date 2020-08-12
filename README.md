@@ -1,8 +1,9 @@
 # SetonoSyliusTrustpilotPlugin
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version][ico-version]][link-packagist]
+[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
+[![Build Status][ico-github-actions]][link-github-actions]
 [![Quality Score][ico-code-quality]][link-code-quality]
 
 Send follow up emails to your customers to entice them to leave feedback for you. The plugin uses Trustpilots [AFS service](https://support.trustpilot.com/hc/en-us/articles/213703667-Automatic-Feedback-Service-AFS-2-0-setup-guide).
@@ -212,11 +213,12 @@ Please run `composer all` to run all checks and tests before making PR or pushin
     $ composer test
     ```
 
-[ico-version]: https://img.shields.io/packagist/v/setono/sylius-trustpilot-plugin.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/Setono/SyliusTrustpilotPlugin/master.svg?style=flat-square
+[ico-version]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/v/stable
+[ico-unstable-version]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/v/unstable
+[ico-license]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/license
+[ico-github-actions]: https://github.com/Setono/SyliusTrustpilotPlugin/workflows/build/badge.svg
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusTrustpilotPlugin.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-trustpilot-plugin
-[link-travis]: https://travis-ci.org/Setono/SyliusTrustpilotPlugin
+[link-github-actions]: https://github.com/Setono/SyliusTrustpilotPlugin/actions
 [link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusTrustpilotPlugin
