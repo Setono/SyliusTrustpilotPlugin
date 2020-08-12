@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace AppBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use function Safe\realpath;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use function Safe\realpath;
 
 final class AppBundle extends Bundle
 {
