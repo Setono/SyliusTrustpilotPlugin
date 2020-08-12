@@ -8,7 +8,7 @@ use Safe\DateTime;
 use function Safe\sprintf;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
+final class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
 {
     /** @var OrderRepositoryInterface */
     protected $orderRepository;

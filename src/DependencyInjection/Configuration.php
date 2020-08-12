@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -17,7 +16,6 @@ final class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('setono_sylius_trustpilot');
 
-        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->addDefaultsIfNotSet()

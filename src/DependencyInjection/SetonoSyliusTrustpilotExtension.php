@@ -14,9 +14,7 @@ final class SetonoSyliusTrustpilotExtension extends AbstractResourceExtension
 {
     public function load(array $config, ContainerBuilder $container): void
     {
-        /** @var ConfigurationInterface $configuration */
-        $configuration = $this->getConfiguration([], $container);
-        $config = $this->processConfiguration($configuration, $config);
+        $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $container->setParameter('setono_sylius_trustpilot.trustpilot_email', $config['trustpilot_email']);

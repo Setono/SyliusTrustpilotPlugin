@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Model;
 
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Webmozart\Assert\Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @mixin CustomerInterface
+ */
 trait CustomerTrait
 {
     /**
@@ -16,11 +22,6 @@ trait CustomerTrait
      * @var bool
      */
     protected $trustpilotEnabled = true;
-
-    /**
-     * @return ArrayCollection|OrderTrustpilotAwareInterface[]
-     */
-    abstract public function getOrders(): Collection;
 
     public function isTrustpilotEnabled(): bool
     {
@@ -34,7 +35,11 @@ trait CustomerTrait
 
     public function getTrustpilotEmailsSent(): int
     {
-        return (int) array_sum($this->getOrders()->map(function (OrderTrustpilotAwareInterface $order) {
+        \assert($this instanceof CustomerInterface);
+
+        return (int) array_sum($this->getOrders()->map(static function (OrderInterface $order): int {
+            Assert::isInstanceOf($order, OrderTrustpilotAwareInterface::class);
+
             return $order->getTrustpilotEmailsSent();
         })->toArray());
     }
