@@ -16,4 +16,4 @@ setono_sylius_trustpilot:
             customer:
                 header: Customer
                 limit_reached: Limit reached
-                trustpilot_enabled: Trustpilot enabled
+                trustpilot_enabled: 'test'
