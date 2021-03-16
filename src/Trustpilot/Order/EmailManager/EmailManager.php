@@ -26,7 +26,7 @@ class EmailManager implements EmailManagerInterface
     ) {
         $this->emailSender = $emailSender;
         $this->trustpilotEmail = $trustpilotEmail;
-        $this->locale = $locale;
+        $this->locale = str_replace('_', '-', $locale);
     }
 
     public function sendTrustpilotEmail(OrderInterface $order): void
