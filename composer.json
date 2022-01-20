@@ -15,7 +15,7 @@
         "thecodingmachine/safe": "^1.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^6.1",
+        "phpspec/phpspec": "^7.1",
         "roave/security-advisories": "dev-latest",
         "setono/code-quality-pack": "^1.4.1",
         "setono/sylius-behat-pack": "^0.1",
