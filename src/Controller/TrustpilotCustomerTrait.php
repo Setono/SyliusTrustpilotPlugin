@@ -11,18 +11,17 @@ use Setono\SyliusTrustpilotPlugin\Model\CustomerTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Bundle\FrameworkBundle\Controller\ControllerTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
 
+/**
+ * @mixin CustomerController
+ */
 trait TrustpilotCustomerTrait
 {
-    use ControllerTrait;
     use ContainerAwareTrait;
-
-    abstract protected function getParameter(string $name);
 
     public function trustpilotBlockAction(Request $request): Response
     {
