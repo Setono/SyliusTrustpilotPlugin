@@ -18,7 +18,7 @@
     "require-dev": {
         "phpspec/phpspec": "^6.1",
         "roave/security-advisories": "dev-latest",
-        "setono/code-quality-pack": "^1.4.1",
+        "setono/code-quality-pack": "^2.2.0",
         "setono/sylius-behat-pack": "^0.1",
         "symfony/debug-bundle": "^4.4 || ^5.0",
         "symfony/dotenv": "^4.4 || ^5.0",
