@@ -3,7 +3,6 @@
 [![Latest Version][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
-[![Quality Score][ico-code-quality]][link-code-quality]
 
 Send follow up emails to your customers to entice them to leave feedback for you. The plugin uses Trustpilots [AFS service](https://support.trustpilot.com/hc/en-us/articles/213703667-Automatic-Feedback-Service-AFS-2-0-setup-guide).
 
@@ -215,8 +214,6 @@ Please run `composer all` to run all checks and tests before making PR or pushin
 [ico-version]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/v/stable
 [ico-license]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/license
 [ico-github-actions]: https://github.com/Setono/SyliusTrustpilotPlugin/workflows/build/badge.svg
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusTrustpilotPlugin.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/setono/sylius-trustpilot-plugin
 [link-github-actions]: https://github.com/Setono/SyliusTrustpilotPlugin/actions
-[link-code-quality]: https://scrutinizer-ci.com/g/Setono/SyliusTrustpilotPlugin
