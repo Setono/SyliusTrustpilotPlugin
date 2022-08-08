@@ -14,21 +14,12 @@ use Webmozart\Assert\Assert;
 
 final class CommandsContext implements Context
 {
-    /** @var KernelInterface */
-    private $kernel;
+    private KernelInterface $kernel;
 
-    /** @var Application */
-    private $application;
+    private ?CommandTester $tester = null;
 
-    /** @var CommandTester */
-    private $tester;
+    private TrustpilotProcessCommand $trustpilotProcessCommand;
 
-    /** @var TrustpilotProcessCommand */
-    private $trustpilotProcessCommand;
-
-    /**
-     * CommandsContext constructor.
-     */
     public function __construct(
         KernelInterface $kernel,
         TrustpilotProcessCommand $trustpilotProcessCommand
@@ -42,10 +33,8 @@ final class CommandsContext implements Context
      */
     public function iRunTrustpilotProcessCommand(): void
     {
-        $this->application = new Application($this->kernel);
-        $this->application->add(
-            $this->trustpilotProcessCommand
-        );
+        $application = new Application($this->kernel);
+        $application->add($this->trustpilotProcessCommand);
         $this->tester = new CommandTester($this->trustpilotProcessCommand);
         $this->tester->execute([
             'command' => $this->trustpilotProcessCommand->getName(),
@@ -59,6 +48,7 @@ final class CommandsContext implements Context
      */
     public function commandSuccess(): void
     {
+        Assert::notNull($this->tester);
         Assert::same($this->tester->getStatusCode(), 0);
     }
 
@@ -67,6 +57,7 @@ final class CommandsContext implements Context
      */
     public function echoCommandOutput(): void
     {
+        Assert::notNull($this->tester);
         echo $this->tester->getDisplay();
     }
 
@@ -75,6 +66,7 @@ final class CommandsContext implements Context
      */
     public function iShouldSeeOutput(string $text): void
     {
+        Assert::notNull($this->tester);
         Assert::contains($this->tester->getDisplay(), $text);
     }
 
@@ -83,6 +75,7 @@ final class CommandsContext implements Context
      */
     public function iShouldNotSeeOutput(string $text): void
     {
+        Assert::notNull($this->tester);
         Assert::notContains($this->tester->getDisplay(), $text);
     }
 }

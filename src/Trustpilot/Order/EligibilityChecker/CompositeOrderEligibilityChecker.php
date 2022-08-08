@@ -10,7 +10,7 @@ use Webmozart\Assert\Assert;
 final class CompositeOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
     /** @var OrderEligibilityCheckerInterface[] */
-    private $orderEligibilityCheckers;
+    private array $orderEligibilityCheckers;
 
     /**
      * @param OrderEligibilityCheckerInterface[] $orderEligibilityCheckers

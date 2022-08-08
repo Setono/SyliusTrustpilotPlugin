@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Provider;
 
-use Safe\DateTime;
-use function Safe\sprintf;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
 {
-    /** @var OrderRepositoryInterface */
-    protected $orderRepository;
+    protected OrderRepositoryInterface $orderRepository;
 
-    /** @var int */
-    protected $latestDays;
+    protected int $latestDays;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,
@@ -28,7 +24,7 @@ class LatestOrdersProvider implements PreQualifiedOrdersProviderInterface
     {
         return $this->orderRepository->createListQueryBuilder()
             ->andWhere('o.checkoutCompletedAt > :date')
-            ->setParameter('date', new DateTime(sprintf('-%s day', $this->latestDays)))
+            ->setParameter('date', new \DateTime(sprintf('-%s day', $this->latestDays)))
             ->getQuery()
             ->getResult();
     }

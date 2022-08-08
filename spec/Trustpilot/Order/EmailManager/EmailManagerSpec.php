@@ -27,7 +27,7 @@ class EmailManagerSpec extends ObjectBehavior
         $emailSender->send('trustpilot_email', ['email@example.com'], [
             'order' => $order,
             'customer' => $customer,
-            'locale' => 'da_DK',
+            'locale' => 'da-DK',
         ])->shouldBeCalled();
 
         $this->sendTrustpilotEmail($order);

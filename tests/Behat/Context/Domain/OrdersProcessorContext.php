@@ -15,14 +15,11 @@ use Webmozart\Assert\Assert;
 
 final class OrdersProcessorContext implements Context
 {
-    /** @var TrustpilotOrdersProcessor */
-    private $trustpilotOrdersProcessor;
+    private TrustpilotOrdersProcessor $trustpilotOrdersProcessor;
 
-    /** @var BufferedOutput */
-    private $output;
+    private BufferedOutput $output;
 
-    /** @var string */
-    private $lastOutputData;
+    private ?string $lastOutputData = null;
 
     public function __construct(
         TrustpilotOrdersProcessor $trustpilotOrdersProcessor
@@ -50,6 +47,7 @@ final class OrdersProcessorContext implements Context
      */
     public function processorShouldReportCountOfPrefetchedOrders(int $count): void
     {
+        Assert::notNull($this->lastOutputData);
         Assert::contains($this->lastOutputData, sprintf(
             'Checking %s order(s)...',
             $count
@@ -61,9 +59,10 @@ final class OrdersProcessorContext implements Context
      */
     public function processorShouldReportOrderEligible(OrderInterface $order): void
     {
+        Assert::notNull($this->lastOutputData);
         Assert::contains($this->lastOutputData, sprintf(
             'Order #%s is eligible.',
-            $order->getNumber() ?: $order->getId()
+            $order->getNumber() ?: (string) $order->getId()
         ));
     }
 
@@ -72,9 +71,10 @@ final class OrdersProcessorContext implements Context
      */
     public function processorShouldNotReportOrderEligible(OrderInterface $order): void
     {
+        Assert::notNull($this->lastOutputData);
         Assert::notContains($this->lastOutputData, sprintf(
             'Order #%s is eligible.',
-            $order->getNumber() ?: $order->getId()
+            $order->getNumber() ?: (string) $order->getId()
         ));
     }
 
@@ -83,6 +83,7 @@ final class OrdersProcessorContext implements Context
      */
     public function processorShouldNotReportAnyOrderEligible(): void
     {
+        Assert::notNull($this->lastOutputData);
         Assert::notContains($this->lastOutputData, 'is eligible.');
     }
 
@@ -91,9 +92,10 @@ final class OrdersProcessorContext implements Context
      */
     public function processorShouldReportTrustpilotEmailSentForCustomer(CustomerInterface $customer): void
     {
+        Assert::notNull($this->lastOutputData);
         Assert::contains($this->lastOutputData, sprintf(
             'Sending email to Trustpilot for %s.',
-            $customer->getEmail()
+            (string) $customer->getEmail()
         ));
     }
 
@@ -102,9 +104,10 @@ final class OrdersProcessorContext implements Context
      */
     public function processorShouldNotReportTrustpilotEmailSentForCustomer(CustomerInterface $customer): void
     {
+        Assert::notNull($this->lastOutputData);
         Assert::notContains($this->lastOutputData, sprintf(
             'Sending email to Trustpilot for %s.',
-            $customer->getEmail()
+            (string) $customer->getEmail()
         ));
     }
 }

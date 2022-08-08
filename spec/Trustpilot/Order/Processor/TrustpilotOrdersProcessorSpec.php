@@ -2,7 +2,7 @@
 
 namespace spec\Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use Prophecy\Argument;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;

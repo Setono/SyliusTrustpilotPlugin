@@ -12,14 +12,11 @@ use Webmozart\Assert\Assert;
 
 final class EmailContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var EmailCheckerInterface */
-    private $emailChecker;
+    private EmailCheckerInterface $emailChecker;
 
-    /** @var string */
-    private $trustpilotEmail;
+    private string $trustpilotEmail;
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -35,9 +32,9 @@ final class EmailContext implements Context
      * @Then trustpilot email should be sent for this order
      * @Then trustpilot email should be sent for order :order
      */
-    public function trustpilotEmailShouldBeSentForOrder(?OrderInterface $order = null)
+    public function trustpilotEmailShouldBeSentForOrder(?OrderInterface $order = null): void
     {
-        if (null == $order) {
+        if (null === $order) {
             $order = $this->sharedStorage->get('order');
             Assert::notNull($order, 'Order not provided and not stored at shared storage');
         }
@@ -46,11 +43,7 @@ final class EmailContext implements Context
         $this->assertEmailContainsMessageTo((string) $order->getId(), $this->trustpilotEmail);
     }
 
-    /**
-     * @param string $message
-     * @param string $recipient
-     */
-    private function assertEmailContainsMessageTo($message, $recipient)
+    private function assertEmailContainsMessageTo(string $message, string $recipient): void
     {
         Assert::true($this->emailChecker->hasMessageTo($message, $recipient));
     }

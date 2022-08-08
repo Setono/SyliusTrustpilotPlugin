@@ -5,30 +5,22 @@ declare(strict_types=1);
 namespace Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Tests\Setono\SyliusTrustpilotPlugin\Behat\Page\Admin\Order\ShowPage;
 use Webmozart\Assert\Assert;
 
 final class ManagingOrdersContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private ShowPage $showPage;
 
-    /** @var ShowPage */
-    private $showPage;
-
-    public function __construct(
-        SharedStorageInterface $sharedStorage,
-        ShowPage $showPage
-    ) {
-        $this->sharedStorage = $sharedStorage;
+    public function __construct(ShowPage $showPage)
+    {
         $this->showPage = $showPage;
     }
 
     /**
      * @When I click customer trustpilot enabled toggle (again)
      */
-    public function iClickCustomerTrustpilotEnabledToggle()
+    public function iClickCustomerTrustpilotEnabledToggle(): void
     {
         $this->showPage->clickCustomerTrustpilotEnabledToggle();
     }
@@ -36,7 +28,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see customer trustpilot enabled toggle turned on
      */
-    public function iShouldSeeCustomerTrustpilotEnabledToggleTurnedOn()
+    public function iShouldSeeCustomerTrustpilotEnabledToggleTurnedOn(): void
     {
         Assert::true(
             $this->showPage->isCustomerTrustpilotEnabledToggleTurnedOn()
@@ -46,7 +38,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see customer trustpilot enabled toggle turned off
      */
-    public function iShouldSeeCustomerTrustpilotEnabledToggleTurnedOff()
+    public function iShouldSeeCustomerTrustpilotEnabledToggleTurnedOff(): void
     {
         Assert::true(
             $this->showPage->isCustomerTrustpilotEnabledToggleTurnedOff()
@@ -56,7 +48,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see trustpilot box
      */
-    public function iShouldSeeTrustpilotBox()
+    public function iShouldSeeTrustpilotBox(): void
     {
         Assert::true(
             $this->showPage->hasTrustpilotBox(),
@@ -67,7 +59,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see :count order emails sent
      */
-    public function iShouldSeeOrderEmailsSentCount(int $count)
+    public function iShouldSeeOrderEmailsSentCount(int $count): void
     {
         Assert::eq($count, $this->showPage->getOrderEmailsSentCount());
     }
@@ -75,7 +67,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then I should see :count customer emails sent
      */
-    public function iShouldSeeCustomerEmailsSentCount(int $count)
+    public function iShouldSeeCustomerEmailsSentCount(int $count): void
     {
         Assert::eq($count, $this->showPage->getCustomerEmailsSentCount());
     }

@@ -20,7 +20,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->addDefaultsIfNotSet()
             ->beforeNormalization()
-                ->always(function ($values) {
+                ->always(function (array $values): array {
                     if (!isset($values['send_in_days'])) {
                         // We should specify default value here
                         // as we need it before normalization

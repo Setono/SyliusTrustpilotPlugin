@@ -1,0 +1,27 @@
+{
+    "symbol-whitelist": [
+        "array",
+        "bool",
+        "callable",
+        "false",
+        "float",
+        "int",
+        "iterable",
+        "null",
+        "object",
+        "parent",
+        "self",
+        "static",
+        "string",
+        "true",
+        "void",
+        "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait",
+        "Sylius\\Bundle\\CoreBundle\\Fixture\\Factory\\ShopUserExampleFactory",
+        "Sylius\\Bundle\\CoreBundle\\Fixture\\ShopUserFixture",
+        "Sylius\\Component\\Core\\Model\\CustomerInterface",
+        "Sylius\\Component\\Core\\Model\\OrderInterface",
+        "Sylius\\Component\\Core\\Model\\ShopUserInterface",
+        "Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface",
+        "Sylius\\Component\\Mailer\\Sender\\SenderInterface"
+    ]
+}

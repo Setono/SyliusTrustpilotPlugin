@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\Trustpilot\Order\Processor;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use function Safe\sprintf;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EligibilityChecker\OrderEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Trustpilot\Order\EmailManager\EmailManagerInterface;
@@ -17,19 +16,15 @@ use Webmozart\Assert\Assert;
 
 final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterface
 {
-    use LoggerAwareTrait;
+    private LoggerInterface $logger;
 
-    /** @var PreQualifiedOrdersProviderInterface */
-    private $preQualifiedOrdersProvider;
+    private PreQualifiedOrdersProviderInterface $preQualifiedOrdersProvider;
 
-    /** @var OrderEligibilityCheckerInterface */
-    private $orderEligibilityChecker;
+    private OrderEligibilityCheckerInterface $orderEligibilityChecker;
 
-    /** @var EmailManagerInterface */
-    private $emailManager;
+    private EmailManagerInterface $emailManager;
 
-    /** @var EntityManagerInterface */
-    private $orderManager;
+    private EntityManagerInterface $orderManager;
 
     public function __construct(
         PreQualifiedOrdersProviderInterface $preQualifiedOrdersProvider,
@@ -51,7 +46,7 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
         $preQualifiedOrders = $this->preQualifiedOrdersProvider->getOrders();
 
         $this->logger->info(sprintf(
-            'Checking %s order(s)...',
+            'Checking %d order(s)...',
             count($preQualifiedOrders)
         ));
 
@@ -63,8 +58,8 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
 
                 $this->logger->info(sprintf(
                     'Order #%s is eligible. Sending email to Trustpilot for %s.',
-                    null !== $order->getNumber() ? $order->getNumber() : $order->getId(),
-                    $customer->getEmail()
+                    $order->getNumber() ?? (string) $order->getId(),
+                    (string) $customer->getEmail()
                 ));
 
                 $this->emailManager->sendTrustpilotEmail($order);
@@ -76,5 +71,10 @@ final class TrustpilotOrdersProcessor implements TrustpilotOrdersProcessorInterf
                 $this->orderManager->flush();
             }
         }
+    }
+
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
     }
 }

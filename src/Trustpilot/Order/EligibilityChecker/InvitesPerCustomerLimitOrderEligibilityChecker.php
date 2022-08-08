@@ -10,11 +10,9 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 final class InvitesPerCustomerLimitOrderEligibilityChecker implements OrderEligibilityCheckerInterface
 {
-    /** @var OrderRepositoryInterface */
-    private $orderRepository;
+    private OrderRepositoryInterface $orderRepository;
 
-    /** @var int */
-    private $limit;
+    private int $limit;
 
     public function __construct(
         OrderRepositoryInterface $orderRepository,

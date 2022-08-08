@@ -1,7 +1,6 @@
-# SetonoSyliusTrustpilotPlugin
+# Trustpilot plugin for your Sylius store
 
 [![Latest Version][ico-version]][link-packagist]
-[![Latest Unstable Version][ico-unstable-version]][link-packagist]
 [![Software License][ico-license]](LICENSE)
 [![Build Status][ico-github-actions]][link-github-actions]
 [![Quality Score][ico-code-quality]][link-code-quality]
@@ -214,7 +213,6 @@ Please run `composer all` to run all checks and tests before making PR or pushin
     ```
 
 [ico-version]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/v/stable
-[ico-unstable-version]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/v/unstable
 [ico-license]: https://poser.pugx.org/setono/sylius-trustpilot-plugin/license
 [ico-github-actions]: https://github.com/Setono/SyliusTrustpilotPlugin/workflows/build/badge.svg
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/Setono/SyliusTrustpilotPlugin.svg?style=flat-square

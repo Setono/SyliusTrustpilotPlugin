@@ -14,8 +14,7 @@ class TrustpilotProcessCommand extends Command
 {
     protected static $defaultName = 'setono:trustpilot:process';
 
-    /** @var TrustpilotOrdersProcessorInterface */
-    protected $trustpilotOrdersProcessor;
+    protected TrustpilotOrdersProcessorInterface $trustpilotOrdersProcessor;
 
     public function __construct(
         TrustpilotOrdersProcessorInterface $trustpilotOrdersProcessor
