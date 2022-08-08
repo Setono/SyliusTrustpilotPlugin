@@ -14,12 +14,8 @@ use Webmozart\Assert\Assert;
  */
 trait CustomerTrait
 {
-    /**
-     * @ORM\Column(name="trustpilot_enabled", type="boolean", options={"default": 1})
-     *
-     * @var bool
-     */
-    protected $trustpilotEnabled = true;
+    /** @ORM\Column(name="trustpilot_enabled", type="boolean", options={"default": 1}) */
+    protected bool $trustpilotEnabled = true;
 
     public function isTrustpilotEnabled(): bool
     {

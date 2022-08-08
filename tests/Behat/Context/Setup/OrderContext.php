@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Setono\SyliusTrustpilotPlugin\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Setono\SyliusTrustpilotPlugin\Model\OrderTrustpilotAwareInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -13,15 +13,10 @@ use Webmozart\Assert\Assert;
 
 final class OrderContext implements Context
 {
-    /** @var SharedStorageInterface */
-    private $sharedStorage;
+    private SharedStorageInterface $sharedStorage;
 
-    /** @var ObjectManager */
-    private $objectManager;
+    private ObjectManager $objectManager;
 
-    /**
-     * OrderContext constructor.
-     */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ObjectManager $objectManager

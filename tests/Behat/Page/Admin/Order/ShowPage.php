@@ -9,7 +9,7 @@ use Sylius\Behat\Page\Admin\Order\ShowPage as BaseShowPage;
 
 class ShowPage extends BaseShowPage
 {
-    public function clickCustomerTrustpilotEnabledToggle()
+    public function clickCustomerTrustpilotEnabledToggle(): void
     {
         $this->getElement('customer_trustpilot_enabled_toggle')->click();
     }

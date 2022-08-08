@@ -1,3 +1,7 @@
+imports:
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/config.yaml" }
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/app/fixtures.yaml" }
+
 setono_sylius_trustpilot:
     trustpilot_email: "%env(APP_TRUSTPILOT_EMAIL)%"
     invites_limit: 1

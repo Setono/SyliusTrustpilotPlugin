@@ -10,14 +10,11 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 
 class EmailManager implements EmailManagerInterface
 {
-    /** @var SenderInterface */
-    private $emailSender;
+    private SenderInterface $emailSender;
 
-    /** @var string */
-    private $trustpilotEmail;
+    private string $trustpilotEmail;
 
-    /** @var string */
-    private $locale;
+    private string $locale;
 
     public function __construct(
         SenderInterface $emailSender,
