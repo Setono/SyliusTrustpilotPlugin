@@ -1,0 +1,34 @@
+sylius_grid:
+    grids:
+        setono_sylius_trustpilot_admin_channel_configuration:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%setono_sylius_trustpilot.model.channel_configuration.class%"
+            limits: [100, 250, 500, 1000]
+            fields:
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: channel
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                afsEmail:
+                    type: string
+                    label: setono_sylius_trustpilot.ui.afs_email
+                sendDelay:
+                    type: string
+                    label: setono_sylius_trustpilot.ui.send_delay
+                preferredSendTime:
+                    type: string
+                    label: setono_sylius_trustpilot.ui.preferred_send_time
+                templateId:
+                    type: string
+                    label: setono_sylius_trustpilot.ui.template_id
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    delete:
+                        type: delete

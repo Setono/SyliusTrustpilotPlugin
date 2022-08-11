@@ -1,0 +1,25 @@
+setono_sylius_trustpilot_admin_channel_configuration:
+    resource: |
+        alias: setono_sylius_trustpilot.channel_configuration
+        section: admin
+        permission: true
+        templates: '@SyliusAdmin\\Crud'
+        redirect: index
+        grid: setono_sylius_trustpilot_admin_channel_configuration
+        vars:
+            index:
+                icon: 'star'
+    type: sylius.resource
+    
+setono_sylius_trustpilot_admin_invitation:
+    resource: |
+        alias: setono_sylius_trustpilot.invitation
+        section: admin
+        permission: true
+        templates: '@SyliusAdmin\\Crud'
+        redirect: index
+        grid: setono_sylius_trustpilot_admin_invitation
+        vars:
+            index:
+                icon: 'star'
+    type: sylius.resource

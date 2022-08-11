@@ -15,13 +15,15 @@
         "string",
         "true",
         "void",
+        "Sylius\\Bundle\\ChannelBundle\\Form\\Type\\ChannelChoiceType",
         "Sylius\\Bundle\\CoreBundle\\Application\\SyliusPluginTrait",
-        "Sylius\\Bundle\\CoreBundle\\Fixture\\Factory\\ShopUserExampleFactory",
-        "Sylius\\Bundle\\CoreBundle\\Fixture\\ShopUserFixture",
+        "Sylius\\Bundle\\UiBundle\\Menu\\Event\\MenuBuilderEvent",
+        "Sylius\\Component\\Channel\\Model\\ChannelAwareInterface",
+        "Sylius\\Component\\Channel\\Model\\ChannelInterface",
         "Sylius\\Component\\Core\\Model\\CustomerInterface",
         "Sylius\\Component\\Core\\Model\\OrderInterface",
-        "Sylius\\Component\\Core\\Model\\ShopUserInterface",
-        "Sylius\\Component\\Core\\Repository\\OrderRepositoryInterface",
-        "Sylius\\Component\\Mailer\\Sender\\SenderInterface"
+        "Sylius\\Component\\Core\\Repository\\CustomerRepositoryInterface",
+        "Sylius\\Component\\Mailer\\Sender\\SenderInterface",
+        "Symfony\\Component\\EventDispatcher\\EventSubscriberInterface"
     ]
 }

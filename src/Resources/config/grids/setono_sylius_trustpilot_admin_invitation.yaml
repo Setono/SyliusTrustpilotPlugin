@@ -1,0 +1,47 @@
+sylius_grid:
+    grids:
+        setono_sylius_trustpilot_admin_invitation:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%setono_sylius_trustpilot.model.invitation.class%"
+            limits: [100, 250, 500, 1000]
+            fields:
+                order:
+                    type: twig
+                    label: sylius.ui.order
+                    path: order
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: order.channel
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+                customer:
+                    type: twig
+                    label: sylius.ui.customer
+                    path: order.customer
+                    options:
+                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+                state:
+                    type: twig
+                    label: setono_sylius_trustpilot.ui.state
+                    options:
+                        template: "@SetonoSyliusTrustpilotPlugin/admin/grid/label/invitation_state.html.twig"
+                sentAt:
+                    type: datetime
+                    label: setono_sylius_trustpilot.ui.sent_at
+                    sortable: ~
+                    options:
+                        format: d-m-Y H:i
+            actions:
+                main:
+                    # todo create our own button with different color and icon
+                    channel_configurations:
+                        type: create
+                        label: setono_sylius_trustpilot.ui.channel_configurations
+                        options:
+                            link:
+                                route: setono_sylius_trustpilot_admin_channel_configuration_index

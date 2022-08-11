@@ -14,16 +14,3 @@ sylius_shop:
 
 sylius_api:
     enabled: true
-
-sylius_order:
-    resources:
-        order:
-            classes:
-                model: Tests\Setono\SyliusTrustpilotPlugin\Application\Entity\Order
-
-sylius_customer:
-    resources:
-        customer:
-            classes:
-                model: Tests\Setono\SyliusTrustpilotPlugin\Application\Entity\Customer
-                controller: Setono\SyliusTrustpilotPlugin\Controller\CustomerController

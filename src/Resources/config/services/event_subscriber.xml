@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="setono_sylius_trustpilot.event_subscriber.create_invitation_on_order_complete"
+                 class="Setono\SyliusTrustpilotPlugin\EventSubscriber\CreateInvitationOnOrderCompleteSubscriber">
+            <argument type="service" id="setono_sylius_trustpilot.factory.invitation"/>
+            <argument type="service" id="setono_sylius_trustpilot.repository.channel_configuration"/>
+            <argument type="service" id="doctrine"/>
+
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <!-- Workflow event subscribers -->
+        <service id="setono_sylius_trustpilot.event_subscriber.workflow.set_sent_at"
+                 class="Setono\SyliusTrustpilotPlugin\EventSubscriber\Workflow\SetSentAtSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
+        <service id="setono_sylius_trustpilot.event_subscriber.workflow.set_state_updated_at"
+                 class="Setono\SyliusTrustpilotPlugin\EventSubscriber\Workflow\SetStateUpdatedAtSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+    </services>
+</container>

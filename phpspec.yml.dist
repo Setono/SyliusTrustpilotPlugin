@@ -1,4 +1,0 @@
-suites:
-    main:
-        namespace: Setono\SyliusTrustpilotPlugin
-        psr4_prefix: Setono\SyliusTrustpilotPlugin
