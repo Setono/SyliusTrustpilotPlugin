@@ -7,17 +7,21 @@ namespace Setono\SyliusTrustpilotPlugin\Repository;
 use Setono\SyliusTrustpilotPlugin\Model\InvitationInterface;
 use Setono\SyliusTrustpilotPlugin\Workflow\InvitationWorkflow;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Webmozart\Assert\Assert;
 
 class InvitationRepository extends EntityRepository implements InvitationRepositoryInterface
 {
-    public function findNew(): array
+    public function findNew(int $limit = 100): array
     {
-        $objs = $this->findBy([
-            'state' => InvitationWorkflow::STATE_INITIAL,
-        ]);
+        $qb = $this->createQueryBuilder('o')
+            ->andWhere('o.state = :state')
+            ->setParameter('state', InvitationWorkflow::STATE_INITIAL);
 
-        Assert::allIsInstanceOf($objs, InvitationInterface::class);
+        if ($limit > 0) {
+            $qb->setMaxResults($limit);
+        }
+
+        /** @var list<InvitationInterface> $objs */
+        $objs = $qb->getQuery()->getResult();
 
         return $objs;
     }
