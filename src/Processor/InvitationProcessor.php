@@ -8,9 +8,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Setono\DoctrineObjectManagerTrait\ORM\ORMManagerTrait;
 use Setono\SyliusTrustpilotPlugin\Mailer\AfsEmailDto;
 use Setono\SyliusTrustpilotPlugin\Mailer\EmailManagerInterface;
-use Setono\SyliusTrustpilotPlugin\Model\ChannelConfiguration;
 use Setono\SyliusTrustpilotPlugin\Model\ChannelConfigurationInterface;
 use Setono\SyliusTrustpilotPlugin\Model\InvitationInterface;
+use Setono\SyliusTrustpilotPlugin\Repository\ChannelConfigurationRepositoryInterface;
 use Setono\SyliusTrustpilotPlugin\Workflow\InvitationWorkflow;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Registry;
@@ -24,14 +24,18 @@ final class InvitationProcessor implements InvitationProcessorInterface
 
     private Registry $workflowRegistry;
 
+    private ChannelConfigurationRepositoryInterface $channelConfigurationRepository;
+
     public function __construct(
         ManagerRegistry $managerRegistry,
         EmailManagerInterface $emailManager,
-        Registry $workflowRegistry
+        Registry $workflowRegistry,
+        ChannelConfigurationRepositoryInterface $channelConfigurationRepository
     ) {
         $this->managerRegistry = $managerRegistry;
         $this->emailManager = $emailManager;
         $this->workflowRegistry = $workflowRegistry;
+        $this->channelConfigurationRepository = $channelConfigurationRepository;
     }
 
     public function process(InvitationInterface $invitation): void
@@ -99,11 +103,11 @@ final class InvitationProcessor implements InvitationProcessorInterface
         $channel = $order->getChannel();
         Assert::notNull($channel);
 
-        // todo check if there's a channel configuration for the channel where the order was placed
-
-        $channelConfiguration = new ChannelConfiguration();
-        $channelConfiguration->setChannel($channel);
-        $channelConfiguration->setAfsEmail('johndoe@example.com');
+        $channelConfiguration = $this->channelConfigurationRepository->findOneByChannel($channel);
+        Assert::notNull(
+            $channelConfiguration,
+            sprintf('No channel configuration exists for channel %s', (string) $channel->getCode())
+        );
 
         return $channelConfiguration;
     }
