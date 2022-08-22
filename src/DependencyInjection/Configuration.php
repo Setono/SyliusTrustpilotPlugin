@@ -4,53 +4,74 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\DependencyInjection;
 
+use Setono\SyliusTrustpilotPlugin\Form\Type\ChannelConfigurationType;
+use Setono\SyliusTrustpilotPlugin\Model\ChannelConfiguration;
+use Setono\SyliusTrustpilotPlugin\Model\Invitation;
+use Setono\SyliusTrustpilotPlugin\Repository\ChannelConfigurationRepository;
+use Setono\SyliusTrustpilotPlugin\Repository\InvitationRepository;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Resource\Factory\Factory;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    private const MINIMAL_DAYS_GAP = 2;
-
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('setono_sylius_trustpilot');
 
         $rootNode = $treeBuilder->getRootNode();
+
         $rootNode
             ->addDefaultsIfNotSet()
-            ->beforeNormalization()
-                ->always(function (array $values): array {
-                    if (!isset($values['send_in_days'])) {
-                        // We should specify default value here
-                        // as we need it before normalization
-                        $values['send_in_days'] = 7;
-                    } elseif ($values['send_in_days'] < 1) {
-                        throw new \InvalidArgumentException("Parameter 'send_in_days' should not be less than 1");
-                    }
+            ->children()
+                ->scalarNode('driver')
+                    ->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
 
-                    if (empty($values['process_latest_days'])) {
-                        $values['process_latest_days'] = $values['send_in_days'] + self::MINIMAL_DAYS_GAP;
-                    } elseif ($values['process_latest_days'] - $values['send_in_days'] < self::MINIMAL_DAYS_GAP) {
-                        throw new \InvalidArgumentException(sprintf(
-                            "Parameter 'process_latest_days' (%s) should be greater than 'send_in_days' + " . self::MINIMAL_DAYS_GAP . '. Recommended value: %s',
-                            $values['process_latest_days'],
-                            $values['send_in_days'] + self::MINIMAL_DAYS_GAP
-                        ));
-                    }
-
-                    return $values;
-                })
-            ->end()
-        ;
-
-        $rootNodeChildren = $rootNode->children();
-        $rootNodeChildren->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
-        $rootNodeChildren->scalarNode('trustpilot_email')->isRequired()->cannotBeEmpty();
-        $rootNodeChildren->scalarNode('process_latest_days')->defaultValue(0);
-        $rootNodeChildren->scalarNode('send_in_days');
-        $rootNodeChildren->scalarNode('invites_limit')->defaultValue(0);
+        $this->addResourcesSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    private function addResourcesSection(ArrayNodeDefinition $node): void
+    {
+        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,PossiblyUndefinedMethod */
+        $node
+            ->children()
+                ->arrayNode('resources')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('channel_configuration')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(ChannelConfiguration::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(ChannelConfigurationRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(ChannelConfigurationType::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('invitation')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(Invitation::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(InvitationRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(DefaultResourceType::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+        ;
     }
 }

@@ -1,0 +1,17 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <mapped-superclass name="Setono\SyliusTrustpilotPlugin\Model\ChannelConfiguration"
+                       table="setono_sylius_trustpilot__channel_configuration">
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="afsEmail"/>
+        <field name="sendDelay" type="integer"/>
+        <field name="preferredSendTime"/>
+        <field name="templateId" nullable="true"/>
+
+        <many-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
+            <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" unique="true"/>
+        </many-to-one>
+    </mapped-superclass>
+</doctrine-mapping>

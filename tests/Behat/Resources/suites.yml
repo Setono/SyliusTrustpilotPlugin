@@ -1,4 +1,0 @@
-imports:
-    - suites/cli/cli.yml
-    - suites/domain/orders_processor.yml
-    - suites/ui/admin/managing_orders.yml

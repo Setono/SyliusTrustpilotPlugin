@@ -1,19 +1,22 @@
 setono_sylius_trustpilot:
+    form:
+        channel_configuration:
+            afs_email: AFS email
+            send_delay: Send delay in seconds
+            preferred_send_time: Preferred send time
+            template_id: Template id
     ui:
-        trustpilot_emails_sent: Trustpilot emails sent
-        trustpilot_enabled: Trustpilot enabled
-        order:
-            button:
-                trustpilot_enable:
-                    label: Enable
-                trustpilot_disable:
-                    label: Disable
-        segment:
-            header: Trustpilot
-            order:
-                header: Order
-                emails_sent: Trustpilot emails sent
-            customer:
-                header: Customer
-                limit_reached: Limit reached
-                trustpilot_enabled: Trustpilot enabled
+        afs_email: AFS email
+        channel_configurations: Channel configurations
+        failed: Failed
+        invitations: Invitations
+        new_channel_configuration: New channel configuration
+        pending: Pending
+        preferred_send_time: Preferred send time
+        processing: Processing
+        send_delay: Send delay
+        sent: Sent
+        sent_at: Sent at
+        state: State
+        template_id: Template id
+        trustpilot: Trustpilot

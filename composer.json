@@ -10,28 +10,36 @@
     ],
     "require": {
         "php": ">=7.4",
+        "ext-json": "*",
         "doctrine/orm": "^2.13",
+        "doctrine/persistence": "^2.5",
+        "knplabs/knp-menu": "^3.3",
         "psr/log": "^1.1 || ^2.0 || ^3.0",
+        "setono/doctrine-object-manager-trait": "^1.1",
         "sylius/resource-bundle": "^1.8",
         "symfony/config": "^4.4 || ^5.4 || ^6.0",
         "symfony/console": "^4.4 || ^5.4 || ^6.0",
         "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+        "symfony/form": "^4.4 || ^5.4 || ^6.0",
         "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
+        "symfony/messenger": "^4.4 || ^5.4 || ^6.0",
         "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
+        "symfony/workflow": "^4.4 || ^5.4 || ^6.0",
+        "twig/twig": "^2.15",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "api-platform/core": "^2.6",
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
-        "lexik/jwt-authentication-bundle": "^2.15",
+        "lexik/jwt-authentication-bundle": "^2.16",
         "phpspec/phpspec": "^7.2",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
-        "psalm/plugin-phpunit": "^0.17.0",
+        "psalm/plugin-phpunit": "^0.17",
         "psalm/plugin-symfony": "^3.1",
         "roave/security-advisories": "dev-latest",
-        "setono/code-quality-pack": "^2.2",
-        "setono/sylius-behat-pack": "^0.2",
+        "setono/code-quality-pack": "^2.2.1",
         "sylius/admin-api-bundle": "^1.11",
         "sylius/sylius": "~1.10.14",
         "symfony/debug-bundle": "^4.4 || ^5.4 || ^6.0",
@@ -40,7 +48,7 @@
         "symfony/property-info": "^4.4 || ^5.4 || ^6.0",
         "symfony/serializer": "^4.4 || ^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^4.4 || ^5.4 || ^6.0",
-        "symfony/webpack-encore-bundle": "^1.14"
+        "symfony/webpack-encore-bundle": "^1.15"
     },
     "prefer-stable": true,
     "autoload": {
@@ -50,7 +58,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "AppBundle\\": "tests/Application/src/AppBundle/",
             "Tests\\Setono\\SyliusTrustpilotPlugin\\": "tests/"
         }
     },

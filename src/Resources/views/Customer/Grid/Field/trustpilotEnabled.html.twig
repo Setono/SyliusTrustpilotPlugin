@@ -1,9 +1,0 @@
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{% if data.trustpilotEnabled %}
-    {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_disable', { 'id': data.id }) %}
-    {{ buttons.default(path, null, null, 'toggle on', 'teal') }}
-{% else %}
-    {% set path = path('setono_sylius_trustpilot_admin_customer_trustpilot_enable', { 'id': data.id }) %}
-    {{ buttons.default(path, null, null, 'toggle off', 'gray') }}
-{% endif %}

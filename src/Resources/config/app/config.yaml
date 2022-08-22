@@ -1,8 +1,22 @@
 imports:
-    - { resource: grids.yaml }
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/grids/setono_sylius_trustpilot_admin_channel_configuration.yaml" }
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/grids/setono_sylius_trustpilot_admin_invitation.yaml" }
+
+framework:
+    messenger:
+        buses:
+            setono_sylius_trustpilot.command_bus: ~
 
 sylius_mailer:
     emails:
         trustpilot_email:
             subject: setono_sylius_trustpilot.emails.trustpilot.subject
-            template: "@SetonoSyliusTrustpilotPlugin/Email/trustpilot.html.twig"
+            template: "@SetonoSyliusTrustpilotPlugin/email/trustpilot.html.twig"
+
+sylius_ui:
+    events:
+        setono_sylius_trustpilot.admin.invitation.index:
+            blocks:
+                missing_channel_configurations:
+                    template: "@SetonoSyliusTrustpilotPlugin/admin/block/_missing_channel_configurations.html.twig"
+                    priority: 11

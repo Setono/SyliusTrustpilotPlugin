@@ -1,0 +1,9 @@
+{% if not hasAny %}
+    <div class="ui hidden divider"></div>
+    <div class="ui negative message">
+        <div class="header">
+            No channel configurations
+        </div>
+        <p>You need to create at least one channel configuration before invitations are sent out. Go to <a href="{{ path('setono_sylius_trustpilot_admin_channel_configuration_create') }}">channel configurations</a> to create your first one.</p>
+    </div>
+{% endif %}
