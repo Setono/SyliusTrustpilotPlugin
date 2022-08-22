@@ -9,6 +9,7 @@ setono_sylius_trustpilot:
         afs_email: AFS email
         channel_configurations: Channel configurations
         failed: Failed
+        initial: Initial
         invitations: Invitations
         new_channel_configuration: New channel configuration
         pending: Pending

@@ -12,5 +12,5 @@ interface InvitationRepositoryInterface extends RepositoryInterface
     /**
      * @return list<InvitationInterface>
      */
-    public function findPending(): array;
+    public function findNew(): array;
 }

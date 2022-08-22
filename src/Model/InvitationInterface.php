@@ -37,6 +37,11 @@ interface InvitationInterface extends ResourceInterface, TimestampableInterface
     public function setStateUpdatedAt(DateTimeInterface $stateUpdatedAt): void;
 
     /**
+     * Returns true if the state of this invitation is pending
+     */
+    public function isPending(): bool;
+
+    /**
      * Returns true if the invitation is deletable
      */
     public function isDeletable(): bool;

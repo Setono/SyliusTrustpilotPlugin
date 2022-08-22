@@ -13,11 +13,15 @@ final class InvitationWorkflow
 
     public const STATE_FAILED = 'failed';
 
+    public const STATE_INITIAL = 'initial';
+
     public const STATE_PENDING = 'pending';
 
     public const STATE_PROCESSING = 'processing';
 
     public const STATE_SENT = 'sent';
+
+    public const TRANSITION_START = 'start';
 
     public const TRANSITION_PROCESS = 'process';
 
@@ -34,6 +38,7 @@ final class InvitationWorkflow
     {
         return [
             self::STATE_FAILED,
+            self::STATE_INITIAL,
             self::STATE_PENDING,
             self::STATE_PROCESSING,
             self::STATE_SENT,
@@ -58,7 +63,7 @@ final class InvitationWorkflow
                     'property' => 'state',
                 ],
                 'supports' => InvitationInterface::class,
-                'initial_marking' => self::STATE_PENDING,
+                'initial_marking' => self::STATE_INITIAL,
                 'places' => self::getStates(),
                 'transitions' => $transitions,
             ],
@@ -71,6 +76,7 @@ final class InvitationWorkflow
     public static function getTransitions(): array
     {
         return [
+            new Transition(self::TRANSITION_START, self::STATE_INITIAL, self::STATE_PENDING),
             new Transition(self::TRANSITION_PROCESS, self::STATE_PENDING, self::STATE_PROCESSING),
             new Transition(self::TRANSITION_SEND, self::STATE_PROCESSING, self::STATE_SENT),
         ];

@@ -11,10 +11,10 @@ use Webmozart\Assert\Assert;
 
 class InvitationRepository extends EntityRepository implements InvitationRepositoryInterface
 {
-    public function findPending(): array
+    public function findNew(): array
     {
         $objs = $this->findBy([
-            'state' => InvitationWorkflow::STATE_PENDING,
+            'state' => InvitationWorkflow::STATE_INITIAL,
         ]);
 
         Assert::allIsInstanceOf($objs, InvitationInterface::class);
