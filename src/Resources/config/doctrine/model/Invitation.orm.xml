@@ -6,6 +6,8 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="version" type="integer" version="true" />
+
         <field name="state" column="state"/>
 
         <field name="processingError" type="text" nullable="true"/>
