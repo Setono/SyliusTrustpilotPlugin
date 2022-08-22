@@ -16,7 +16,7 @@ class Invitation implements InvitationInterface
 
     protected ?int $id = null;
 
-    protected string $state = InvitationWorkflow::STATE_PENDING;
+    protected string $state = InvitationWorkflow::STATE_INITIAL;
 
     protected ?string $processingError = null;
 
@@ -79,6 +79,11 @@ class Invitation implements InvitationInterface
     public function setStateUpdatedAt(DateTimeInterface $stateUpdatedAt): void
     {
         $this->stateUpdatedAt = $stateUpdatedAt;
+    }
+
+    public function isPending(): bool
+    {
+        return $this->getState() === InvitationWorkflow::STATE_PENDING;
     }
 
     public function isDeletable(): bool

@@ -41,15 +41,15 @@ final class InvitationDispatcher implements InvitationDispatcherInterface
 
     public function dispatch(): void
     {
-        $invitations = $this->invitationRepository->findPending();
+        $invitations = $this->invitationRepository->findNew();
 
         foreach ($invitations as $invitation) {
             $workflow = $this->getWorkflow($invitation);
-            if (!$workflow->can($invitation, InvitationWorkflow::TRANSITION_PROCESS)) {
+            if (!$workflow->can($invitation, InvitationWorkflow::TRANSITION_START)) {
                 continue;
             }
 
-            $workflow->apply($invitation, InvitationWorkflow::TRANSITION_PROCESS);
+            $workflow->apply($invitation, InvitationWorkflow::TRANSITION_START);
 
             $this->getManager($invitation)->flush();
 

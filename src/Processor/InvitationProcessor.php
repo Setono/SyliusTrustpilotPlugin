@@ -24,8 +24,11 @@ final class InvitationProcessor implements InvitationProcessorInterface
 
     private Registry $workflowRegistry;
 
-    public function __construct(ManagerRegistry $managerRegistry, EmailManagerInterface $emailManager, Registry $workflowRegistry)
-    {
+    public function __construct(
+        ManagerRegistry $managerRegistry,
+        EmailManagerInterface $emailManager,
+        Registry $workflowRegistry
+    ) {
         $this->managerRegistry = $managerRegistry;
         $this->emailManager = $emailManager;
         $this->workflowRegistry = $workflowRegistry;
@@ -33,17 +36,20 @@ final class InvitationProcessor implements InvitationProcessorInterface
 
     public function process(InvitationInterface $invitation): void
     {
-        // todo should we allow state=pending also to allow for calling the processor directly on an invitation?
-        if ($invitation->getState() !== InvitationWorkflow::STATE_PROCESSING) {
+        if (!$invitation->isPending()) {
             return;
         }
 
         $manager = $this->getManager($invitation);
 
+        $workflow = $this->workflowRegistry->get($invitation, InvitationWorkflow::NAME);
+        $workflow->apply($invitation, InvitationWorkflow::TRANSITION_PROCESS);
+        $manager->flush();
+
         $channelConfiguration = $this->getChannelConfiguration($invitation);
 
-        $workflow = $this->workflowRegistry->get($invitation, InvitationWorkflow::NAME);
         if (!$workflow->can($invitation, InvitationWorkflow::TRANSITION_SEND)) {
+            // todo we are missing a failed transition here
             $invitation->setProcessingError(sprintf(
                 'Could not take transition "%s". The state when trying to take the transition was: "%s"',
                 InvitationWorkflow::TRANSITION_SEND,
