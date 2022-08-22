@@ -12,5 +12,5 @@ interface InvitationRepositoryInterface extends RepositoryInterface
     /**
      * @return list<InvitationInterface>
      */
-    public function findNew(): array;
+    public function findNew(int $limit = 100): array;
 }

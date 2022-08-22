@@ -14,7 +14,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\WorkflowInterface;
 
-// todo refactor this class
 final class InvitationDispatcher implements InvitationDispatcherInterface
 {
     use ORMManagerTrait;
