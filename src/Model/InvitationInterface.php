@@ -8,8 +8,9 @@ use DateTimeInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\VersionedInterface;
 
-interface InvitationInterface extends ResourceInterface, TimestampableInterface
+interface InvitationInterface extends ResourceInterface, TimestampableInterface, VersionedInterface
 {
     public function getId(): ?int;
 

@@ -9,12 +9,13 @@ use Setono\SyliusTrustpilotPlugin\Workflow\InvitationWorkflow;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-// todo the invitation should be versioned so we never end up with an invitation being sent twice
 class Invitation implements InvitationInterface
 {
     use TimestampableTrait;
 
     protected ?int $id = null;
+
+    protected ?int $version = 1;
 
     protected string $state = InvitationWorkflow::STATE_INITIAL;
 
@@ -29,6 +30,16 @@ class Invitation implements InvitationInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getVersion(): ?int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?int $version): void
+    {
+        $this->version = $version;
     }
 
     public function getState(): string
