@@ -67,6 +67,8 @@ final class InvitationProcessor implements InvitationProcessorInterface
             ));
 
             $this->tryTransition($invitation, InvitationWorkflow::TRANSITION_FAIL);
+
+            throw $e;
         }
     }
 
