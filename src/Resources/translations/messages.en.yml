@@ -8,6 +8,7 @@ setono_sylius_trustpilot:
     ui:
         afs_email: AFS email
         channel_configurations: Channel configurations
+        edit_channel_configuration: Edit channel configuration
         failed: Failed
         initial: Initial
         invitations: Invitations
