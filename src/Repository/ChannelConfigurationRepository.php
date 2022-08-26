@@ -28,7 +28,7 @@ class ChannelConfigurationRepository extends EntityRepository implements Channel
             ->andWhere('o.channel = :channel')
             ->setParameter('channel', $channel)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
 
         Assert::nullOrIsInstanceOf($obj, ChannelConfigurationInterface::class);
