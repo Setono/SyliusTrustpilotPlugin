@@ -38,7 +38,6 @@ sylius_grid:
                         format: d-m-Y H:i
             actions:
                 main:
-                    # todo create our own button with different color and icon
                     channel_configurations:
                         type: create
                         label: setono_sylius_trustpilot.ui.channel_configurations
