@@ -20,7 +20,7 @@ class Invitation implements InvitationInterface
     protected string $state = InvitationWorkflow::STATE_INITIAL;
 
     /** @var list<string> */
-    protected array $processingErrors = [];
+    protected ?array $processingErrors = [];
 
     protected ?OrderInterface $order = null;
 
@@ -55,7 +55,7 @@ class Invitation implements InvitationInterface
 
     public function getProcessingErrors(): array
     {
-        return $this->processingErrors;
+        return $this->processingErrors ?? [];
     }
 
     public function resetProcessingErrors(): void
