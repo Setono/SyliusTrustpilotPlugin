@@ -14,11 +14,15 @@ use Setono\SyliusTrustpilotPlugin\Repository\ChannelConfigurationRepositoryInter
 use Setono\SyliusTrustpilotPlugin\Workflow\InvitationWorkflow;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Workflow\Registry;
+use Symfony\Component\Workflow\WorkflowInterface;
+use Throwable;
 use Webmozart\Assert\Assert;
 
 final class InvitationProcessor implements InvitationProcessorInterface
 {
     use ORMManagerTrait;
+
+    private ?WorkflowInterface $workflow = null;
 
     private EmailManagerInterface $emailManager;
 
@@ -40,39 +44,65 @@ final class InvitationProcessor implements InvitationProcessorInterface
 
     public function process(InvitationInterface $invitation): void
     {
-        if (!$invitation->isPending()) {
-            return;
-        }
+        try {
+            $this->tryTransition($invitation, InvitationWorkflow::TRANSITION_PROCESS);
 
-        $manager = $this->getManager($invitation);
+            $channelConfiguration = $this->getChannelConfiguration($invitation);
 
-        $workflow = $this->workflowRegistry->get($invitation, InvitationWorkflow::NAME);
-        $workflow->apply($invitation, InvitationWorkflow::TRANSITION_PROCESS);
-        $manager->flush();
-
-        $channelConfiguration = $this->getChannelConfiguration($invitation);
-
-        if (!$workflow->can($invitation, InvitationWorkflow::TRANSITION_SEND)) {
-            // todo we are missing a failed transition here
-            $invitation->setProcessingError(sprintf(
-                'Could not take transition "%s". The state when trying to take the transition was: "%s"',
+            $this->tryTransition(
+                $invitation,
                 InvitationWorkflow::TRANSITION_SEND,
-                $invitation->getState()
+                function (InvitationInterface $invitation) use ($channelConfiguration) {
+                    $order = $invitation->getOrder();
+                    Assert::notNull($order);
+
+                    $this->emailManager->sendAfsEmail($this->getEmailDto($channelConfiguration, $order));
+                }
+            );
+        } catch (Throwable $e) {
+            $invitation->addProcessingError(sprintf(
+                'An unexpected error occurred when processing invitation %d: %s',
+                (int) $invitation->getId(),
+                $e->getMessage()
             ));
 
-            $manager->flush();
+            $this->tryTransition($invitation, InvitationWorkflow::TRANSITION_FAIL);
+        }
+    }
 
-            return;
+    private function tryTransition(InvitationInterface $invitation, string $transition, callable $callable = null): void
+    {
+        $manager = $this->getManager($invitation);
+        $workflow = $this->getWorkflow($invitation);
+
+        if (null !== $callable) {
+            if (!$workflow->can($invitation, $transition)) {
+                $invitation->addProcessingError(sprintf(
+                    'Could not take transition "%s". The state when trying to take the transition was: "%s"',
+                    $transition,
+                    $invitation->getState()
+                ));
+
+                $this->tryTransition($invitation, InvitationWorkflow::TRANSITION_FAIL);
+
+                return;
+            }
+
+            $callable($invitation);
         }
 
-        $order = $invitation->getOrder();
-        Assert::notNull($order);
-
-        $this->emailManager->sendAfsEmail($this->getEmailDto($channelConfiguration, $order));
-
-        $workflow->apply($invitation, InvitationWorkflow::TRANSITION_SEND);
+        $workflow->apply($invitation, $transition);
 
         $manager->flush();
+    }
+
+    private function getWorkflow(InvitationInterface $invitation): WorkflowInterface
+    {
+        if (null === $this->workflow) {
+            $this->workflow = $this->workflowRegistry->get($invitation, InvitationWorkflow::NAME);
+        }
+
+        return $this->workflow;
     }
 
     private function getEmailDto(ChannelConfigurationInterface $channelConfiguration, OrderInterface $order): AfsEmailDto

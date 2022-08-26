@@ -14,6 +14,11 @@
         </service>
 
         <!-- Workflow event subscribers -->
+        <service id="setono_sylius_trustpilot.event_subscriber.workflow.reset_processing_errors"
+                 class="Setono\SyliusTrustpilotPlugin\EventSubscriber\Workflow\ResetProcessingErrorsSubscriber">
+            <tag name="kernel.event_subscriber"/>
+        </service>
+
         <service id="setono_sylius_trustpilot.event_subscriber.workflow.set_sent_at"
                  class="Setono\SyliusTrustpilotPlugin\EventSubscriber\Workflow\SetSentAtSubscriber">
             <tag name="kernel.event_subscriber"/>

@@ -27,6 +27,8 @@ final class InvitationWorkflow
 
     public const TRANSITION_SEND = 'send';
 
+    public const TRANSITION_FAIL = 'fail';
+
     private function __construct()
     {
     }
@@ -79,6 +81,7 @@ final class InvitationWorkflow
             new Transition(self::TRANSITION_START, self::STATE_INITIAL, self::STATE_PENDING),
             new Transition(self::TRANSITION_PROCESS, self::STATE_PENDING, self::STATE_PROCESSING),
             new Transition(self::TRANSITION_SEND, self::STATE_PROCESSING, self::STATE_SENT),
+            new Transition(self::TRANSITION_FAIL, self::getStates(), self::STATE_FAILED),
         ];
     }
 }
