@@ -21,9 +21,14 @@ interface InvitationInterface extends ResourceInterface, TimestampableInterface,
      */
     public function setState(string $state): void;
 
-    public function getProcessingError(): ?string;
+    /**
+     * @return list<string>
+     */
+    public function getProcessingErrors(): array;
 
-    public function setProcessingError(?string $processingError): void;
+    public function resetProcessingErrors(): void;
+
+    public function addProcessingError(string $processingError): void;
 
     public function getOrder(): ?OrderInterface;
 
