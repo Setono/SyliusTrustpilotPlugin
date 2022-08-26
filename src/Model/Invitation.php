@@ -68,6 +68,13 @@ class Invitation implements InvitationInterface
         $this->processingErrors[] = $processingError;
     }
 
+    public function addProcessingErrors(array $processingErrors): void
+    {
+        foreach ($processingErrors as $processingError) {
+            $this->addProcessingError($processingError);
+        }
+    }
+
     public function getOrder(): ?OrderInterface
     {
         return $this->order;
@@ -103,8 +110,33 @@ class Invitation implements InvitationInterface
         return $this->getState() === InvitationWorkflow::STATE_PENDING;
     }
 
+    public function isFailed(): bool
+    {
+        return $this->getState() === InvitationWorkflow::STATE_FAILED;
+    }
+
+    public function isIneligible(): bool
+    {
+        return $this->getState() === InvitationWorkflow::STATE_INELIGIBLE;
+    }
+
     public function isDeletable(): bool
     {
         return $this->getState() !== InvitationWorkflow::STATE_SENT;
+    }
+
+    public function getEmail(): ?string
+    {
+        $order = $this->getOrder();
+        if (null === $order) {
+            return null;
+        }
+
+        $customer = $order->getCustomer();
+        if (null === $customer) {
+            return null;
+        }
+
+        return $customer->getEmailCanonical();
     }
 }

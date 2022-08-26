@@ -6,6 +6,7 @@ namespace Setono\SyliusTrustpilotPlugin\Processor;
 
 use Doctrine\Persistence\ManagerRegistry;
 use Setono\DoctrineObjectManagerTrait\ORM\ORMManagerTrait;
+use Setono\SyliusTrustpilotPlugin\EligibilityChecker\InvitationEligibilityCheckerInterface;
 use Setono\SyliusTrustpilotPlugin\Mailer\AfsEmailDto;
 use Setono\SyliusTrustpilotPlugin\Mailer\EmailManagerInterface;
 use Setono\SyliusTrustpilotPlugin\Model\ChannelConfigurationInterface;
@@ -30,16 +31,20 @@ final class InvitationProcessor implements InvitationProcessorInterface
 
     private ChannelConfigurationRepositoryInterface $channelConfigurationRepository;
 
+    private InvitationEligibilityCheckerInterface $invitationEligibilityChecker;
+
     public function __construct(
         ManagerRegistry $managerRegistry,
         EmailManagerInterface $emailManager,
         Registry $workflowRegistry,
-        ChannelConfigurationRepositoryInterface $channelConfigurationRepository
+        ChannelConfigurationRepositoryInterface $channelConfigurationRepository,
+        InvitationEligibilityCheckerInterface $invitationEligibilityChecker
     ) {
         $this->managerRegistry = $managerRegistry;
         $this->emailManager = $emailManager;
         $this->workflowRegistry = $workflowRegistry;
         $this->channelConfigurationRepository = $channelConfigurationRepository;
+        $this->invitationEligibilityChecker = $invitationEligibilityChecker;
     }
 
     public function process(InvitationInterface $invitation): void
@@ -48,6 +53,15 @@ final class InvitationProcessor implements InvitationProcessorInterface
             $this->tryTransition($invitation, InvitationWorkflow::TRANSITION_PROCESS);
 
             $channelConfiguration = $this->getChannelConfiguration($invitation);
+
+            $eligibilityCheck = $this->invitationEligibilityChecker->check($invitation);
+            if (!$eligibilityCheck->eligible) {
+                $invitation->addProcessingErrors($eligibilityCheck->reasons);
+
+                $this->tryTransition($invitation, InvitationWorkflow::TRANSITION_FAIL_ELIGIBILITY_CHECK);
+
+                return;
+            }
 
             $this->tryTransition(
                 $invitation,

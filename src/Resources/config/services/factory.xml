@@ -9,5 +9,11 @@
                  decorates="setono_sylius_trustpilot.factory.invitation">
             <argument type="service" id="setono_sylius_trustpilot.custom_factory.invitation.inner"/>
         </service>
+
+        <service id="setono_sylius_trustpilot.custom_factory.blacklisted_customer"
+                 class="Setono\SyliusTrustpilotPlugin\Factory\BlacklistedCustomerFactory" decoration-priority="64"
+                 decorates="setono_sylius_trustpilot.factory.blacklisted_customer">
+            <argument type="service" id="setono_sylius_trustpilot.custom_factory.blacklisted_customer.inner"/>
+        </service>
     </services>
 </container>

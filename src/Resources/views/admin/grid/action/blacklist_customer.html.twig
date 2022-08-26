@@ -1,0 +1,6 @@
+{# todo use {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %} in the future when you can add data-requires-confirmation to all buttons #}
+
+<a class="ui labeled icon red button" href="{{ path('setono_sylius_trustpilot_admin_blacklist_customer') }}" data-requires-confirmation>
+    <i class="icon ban"></i>
+    {{ action.label|trans }}
+</a>

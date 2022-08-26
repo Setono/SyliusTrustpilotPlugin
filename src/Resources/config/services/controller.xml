@@ -6,6 +6,17 @@
     <services>
         <defaults public="true"/>
 
+        <service id="setono_sylius_trustpilot.controller.action.blacklist_customer"
+                 class="Setono\SyliusTrustpilotPlugin\Controller\Action\BlacklistCustomerAction">
+            <argument type="service" id="sylius.repository.customer"/>
+            <argument type="service" id="setono_sylius_trustpilot.repository.blacklisted_customer"/>
+            <argument type="service" id="setono_sylius_trustpilot.factory.blacklisted_customer"/>
+            <argument type="service" id="translator"/>
+            <argument type="service" id="router"/>
+
+            <tag name="controller.service_arguments"/>
+        </service>
+
         <service id="setono_sylius_trustpilot.controller.action.render_missing_channel_configurations"
                  class="Setono\SyliusTrustpilotPlugin\Controller\Action\RenderMissingChannelConfigurationsAction">
             <argument type="service" id="setono_sylius_trustpilot.repository.channel_configuration"/>
