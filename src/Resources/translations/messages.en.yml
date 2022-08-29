@@ -20,7 +20,7 @@ setono_sylius_trustpilot:
         processing: Processing
         send_delay: Send delay
         sent: Sent
-        sent_at: Sent at
+        sent_at: Sent to AFS at
         state: State
         template_id: Template id
         trustpilot: Trustpilot
