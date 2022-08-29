@@ -25,7 +25,7 @@ final class ChannelConfigurationType extends AbstractResourceType
             ->add('preferredSendTime', TextType::class, [
                 'label' => 'setono_sylius_trustpilot.form.channel_configuration.preferred_send_time',
             ])
-            ->add('templateId', IntegerType::class, [
+            ->add('templateId', TextType::class, [
                 'label' => 'setono_sylius_trustpilot.form.channel_configuration.template_id',
                 'required' => false,
             ])
