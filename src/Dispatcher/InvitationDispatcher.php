@@ -26,21 +26,25 @@ final class InvitationDispatcher implements InvitationDispatcherInterface
 
     private Registry $workflowRegistry;
 
+    private string $invitationOrderState;
+
     public function __construct(
         ManagerRegistry $managerRegistry,
         MessageBusInterface $commandBus,
         InvitationRepositoryInterface $invitationRepository,
-        Registry $workflowRegistry
+        Registry $workflowRegistry,
+        string $invitationOrderState
     ) {
         $this->managerRegistry = $managerRegistry;
         $this->commandBus = $commandBus;
         $this->invitationRepository = $invitationRepository;
         $this->workflowRegistry = $workflowRegistry;
+        $this->invitationOrderState = $invitationOrderState;
     }
 
     public function dispatch(): void
     {
-        $invitations = $this->invitationRepository->findNew();
+        $invitations = $this->invitationRepository->findNew($this->invitationOrderState);
 
         foreach ($invitations as $invitation) {
             $workflow = $this->getWorkflow($invitation);

@@ -18,10 +18,12 @@ final class SetonoSyliusTrustpilotExtension extends AbstractResourceExtension im
         /**
          * @psalm-suppress PossiblyNullArgument
          *
-         * @var array{driver: string, resources: array} $config
+         * @var array{driver: string, invitation_order_state: string, resources: array} $config
          */
         $config = $this->processConfiguration($this->getConfiguration([], $container), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
+        $container->setParameter('setono_sylius_trustpilot.invitation_order_state', $config['invitation_order_state']);
 
         $this->registerResources('setono_sylius_trustpilot', $config['driver'], $config['resources'], $container);
 
