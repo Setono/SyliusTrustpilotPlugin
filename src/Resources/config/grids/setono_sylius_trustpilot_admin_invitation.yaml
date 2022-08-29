@@ -19,12 +19,9 @@ sylius_grid:
                     path: order.channel
                     options:
                         template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
-                customer:
-                    type: twig
+                email:
+                    type: string
                     label: sylius.ui.customer
-                    path: order.customer
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
                 state:
                     type: twig
                     label: setono_sylius_trustpilot.ui.state

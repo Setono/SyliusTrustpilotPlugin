@@ -70,7 +70,7 @@ final class InvitationProcessor implements InvitationProcessorInterface
                     $order = $invitation->getOrder();
                     Assert::notNull($order);
 
-                    $this->emailManager->sendAfsEmail($this->getEmailDto($channelConfiguration, $order));
+                    $this->emailManager->sendAfsEmail($this->getEmailDto($invitation, $channelConfiguration, $order));
                 }
             );
         } catch (Throwable $e) {
@@ -121,20 +121,19 @@ final class InvitationProcessor implements InvitationProcessorInterface
         return $this->workflow;
     }
 
-    private function getEmailDto(ChannelConfigurationInterface $channelConfiguration, OrderInterface $order): AfsEmailDto
-    {
+    private function getEmailDto(
+        InvitationInterface $invitation,
+        ChannelConfigurationInterface $channelConfiguration,
+        OrderInterface $order
+    ): AfsEmailDto {
         $customer = $order->getCustomer();
         Assert::notNull($customer);
-
-        $recipientEmail = $customer->getEmailCanonical();
-        $recipientName = (string) $customer->getFirstName();
-        Assert::notNull($recipientEmail);
 
         return new AfsEmailDto(
             (string) $channelConfiguration->getAfsEmail(),
             (string) $order->getNumber(),
-            $recipientEmail,
-            $recipientName,
+            (string) $invitation->getEmail(),
+            (string) $customer->getFirstName(), // todo introduce InvitationInterface::getRecipientName() ?
             (string) $order->getLocaleCode(),
             $channelConfiguration->getPreferredSendTimeWithSendDelay(),
             $channelConfiguration->getTemplateId()
