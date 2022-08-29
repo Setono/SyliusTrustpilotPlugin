@@ -13,6 +13,11 @@ sylius_mailer:
             subject: setono_sylius_trustpilot.emails.trustpilot.subject
             template: "@SetonoSyliusTrustpilotPlugin/email/trustpilot.html.twig"
 
+sylius_grid:
+    templates:
+        action:
+            blacklist_customer: "@SetonoSyliusTrustpilotPlugin/admin/grid/action/blacklist_customer.html.twig"
+
 sylius_ui:
     events:
         setono_sylius_trustpilot.admin.invitation.index:
@@ -20,3 +25,7 @@ sylius_ui:
                 missing_channel_configurations:
                     template: "@SetonoSyliusTrustpilotPlugin/admin/block/_missing_channel_configurations.html.twig"
                     priority: 11
+        setono_sylius_trustpilot.admin.invitation.index.javascripts:
+            blocks:
+                javascript_popup:
+                    template: "@SetonoSyliusTrustpilotPlugin/admin/block/_javascript_popup.html.twig"

@@ -10,6 +10,7 @@
             <argument type="service" id="setono_sylius_trustpilot.mailer.email_manager"/>
             <argument type="service" id="workflow.registry"/>
             <argument type="service" id="setono_sylius_trustpilot.repository.channel_configuration"/>
+            <argument type="service" id="setono_sylius_trustpilot.invitation_eligibility_checker.composite"/>
         </service>
     </services>
 </container>

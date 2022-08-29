@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Setono\SyliusTrustpilotPlugin\DependencyInjection;
 
 use Setono\SyliusTrustpilotPlugin\Form\Type\ChannelConfigurationType;
+use Setono\SyliusTrustpilotPlugin\Model\BlacklistedCustomer;
 use Setono\SyliusTrustpilotPlugin\Model\ChannelConfiguration;
 use Setono\SyliusTrustpilotPlugin\Model\Invitation;
+use Setono\SyliusTrustpilotPlugin\Repository\BlacklistedCustomerRepository;
 use Setono\SyliusTrustpilotPlugin\Repository\ChannelConfigurationRepository;
 use Setono\SyliusTrustpilotPlugin\Repository\InvitationRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -44,6 +46,22 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('resources')
                     ->addDefaultsIfNotSet()
                     ->children()
+                        ->arrayNode('blacklisted_customer')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(BlacklistedCustomer::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(BlacklistedCustomerRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('form')->defaultValue(DefaultResourceType::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
                         ->arrayNode('channel_configuration')
                             ->addDefaultsIfNotSet()
                             ->children()

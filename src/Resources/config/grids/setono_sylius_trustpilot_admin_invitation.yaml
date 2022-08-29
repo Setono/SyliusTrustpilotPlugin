@@ -28,6 +28,7 @@ sylius_grid:
                 state:
                     type: twig
                     label: setono_sylius_trustpilot.ui.state
+                    path: .
                     options:
                         template: "@SetonoSyliusTrustpilotPlugin/admin/grid/label/invitation_state.html.twig"
                 sentAt:
@@ -44,3 +45,12 @@ sylius_grid:
                         options:
                             link:
                                 route: setono_sylius_trustpilot_admin_channel_configuration_index
+                item:
+                    blacklist_customer:
+                        type: blacklist_customer
+                        label: setono_sylius_trustpilot.ui.blacklist_customer
+                        options:
+                            link:
+                                route: setono_sylius_trustpilot_admin_blacklist_customer
+                                parameters:
+                                    email: resource.email

@@ -30,6 +30,11 @@ interface InvitationInterface extends ResourceInterface, TimestampableInterface,
 
     public function addProcessingError(string $processingError): void;
 
+    /**
+     * @param list<string> $processingErrors
+     */
+    public function addProcessingErrors(array $processingErrors): void;
+
     public function getOrder(): ?OrderInterface;
 
     public function setOrder(OrderInterface $order): void;
@@ -47,8 +52,14 @@ interface InvitationInterface extends ResourceInterface, TimestampableInterface,
      */
     public function isPending(): bool;
 
+    public function isFailed(): bool;
+
+    public function isIneligible(): bool;
+
     /**
      * Returns true if the invitation is deletable
      */
     public function isDeletable(): bool;
+
+    public function getEmail(): ?string;
 }

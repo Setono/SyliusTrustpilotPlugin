@@ -1,0 +1,3 @@
+setono_sylius_trustpilot:
+    blacklisted_customer:
+        blacklisted: Customer with email %email% was blacklisted

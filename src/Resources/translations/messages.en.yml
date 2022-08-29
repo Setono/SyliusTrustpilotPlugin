@@ -7,9 +7,11 @@ setono_sylius_trustpilot:
             template_id: Template id
     ui:
         afs_email: AFS email
+        blacklist_customer: Blacklist customer
         channel_configurations: Channel configurations
         edit_channel_configuration: Edit channel configuration
         failed: Failed
+        ineligible: Ineligible
         initial: Initial
         invitations: Invitations
         new_channel_configuration: New channel configuration

@@ -23,3 +23,11 @@ setono_sylius_trustpilot_admin_invitation:
             index:
                 icon: 'star'
     type: sylius.resource
+
+setono_sylius_trustpilot_admin_blacklist_customer:
+    path: /blacklist-customer
+    methods: [ GET, POST ]
+    defaults:
+        _controller: setono_sylius_trustpilot.controller.action.blacklist_customer
+        _sylius:
+            section: admin

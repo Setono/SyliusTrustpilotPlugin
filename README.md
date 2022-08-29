@@ -41,6 +41,12 @@ setono_sylius_trustpilot:
     resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/routes.yaml"
 ```
 
+### Install assets
+
+```bash
+bin/console assets:install
+```
+
 ### Update your schema
 
 ```bash
