@@ -17,6 +17,7 @@ sylius_grid:
     templates:
         action:
             blacklist_customer: "@SetonoSyliusTrustpilotPlugin/admin/grid/action/blacklist_customer.html.twig"
+            channel_configurations: "@SetonoSyliusTrustpilotPlugin/admin/grid/action/channel_configurations.html.twig"
 
 sylius_ui:
     events:

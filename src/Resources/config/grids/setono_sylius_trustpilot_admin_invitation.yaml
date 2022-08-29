@@ -40,11 +40,7 @@ sylius_grid:
             actions:
                 main:
                     channel_configurations:
-                        type: create
-                        label: setono_sylius_trustpilot.ui.channel_configurations
-                        options:
-                            link:
-                                route: setono_sylius_trustpilot_admin_channel_configuration_index
+                        type: channel_configurations
                 item:
                     blacklist_customer:
                         type: blacklist_customer
