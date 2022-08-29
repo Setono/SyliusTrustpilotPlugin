@@ -9,7 +9,7 @@
         </parameter>
     </parameters>
     <services>
-        <service id="setono_sylius_gift_card.form.type.add_to_cart_gift_card_information"
+        <service id="setono_sylius_trustpilot.form.type.channel_configuration"
                  class="Setono\SyliusTrustpilotPlugin\Form\Type\ChannelConfigurationType">
             <argument>%setono_sylius_trustpilot.model.channel_configuration.class%</argument>
             <argument>%setono_sylius_trustpilot.form.type.channel_configuration.validation_groups%</argument>
