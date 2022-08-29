@@ -14,6 +14,7 @@ use Setono\SyliusTrustpilotPlugin\Repository\InvitationRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -27,11 +28,17 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode = $treeBuilder->getRootNode();
 
+        /** @psalm-suppress MixedMethodCall,PossiblyNullReference,PossiblyUndefinedMethod */
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')
-                    ->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM);
+                    ->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)
+                ->end()
+                ->scalarNode('invitation_order_state')
+                    ->info('The state in which a order must be before an invitation based on this order is sent out')
+                    ->defaultValue(OrderInterface::STATE_FULFILLED)
+        ;
 
         $this->addResourcesSection($rootNode);
 

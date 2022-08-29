@@ -24,6 +24,7 @@
         "Sylius\\Component\\Core\\Model\\OrderInterface",
         "Sylius\\Component\\Core\\Repository\\CustomerRepositoryInterface",
         "Sylius\\Component\\Mailer\\Sender\\SenderInterface",
+        "Sylius\\Component\\Order\\Model\\OrderInterface",
         "Symfony\\Component\\EventDispatcher\\EventSubscriberInterface"
     ]
 }

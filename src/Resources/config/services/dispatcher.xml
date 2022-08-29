@@ -10,6 +10,7 @@
             <argument type="service" id="setono_sylius_trustpilot.command_bus"/>
             <argument type="service" id="setono_sylius_trustpilot.repository.invitation"/>
             <argument type="service" id="workflow.registry"/>
+            <argument>%setono_sylius_trustpilot.invitation_order_state%</argument>
         </service>
     </services>
 </container>
