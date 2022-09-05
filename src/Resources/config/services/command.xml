@@ -10,5 +10,12 @@
 
             <tag name="console.command"/>
         </service>
+
+        <service id="setono_sylius_trustpilot.command.prune"
+                 class="Setono\SyliusTrustpilotPlugin\Command\PruneCommand">
+            <argument type="service" id="setono_sylius_trustpilot.pruner.default"/>
+
+            <tag name="console.command"/>
+        </service>
     </services>
 </container>

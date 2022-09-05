@@ -35,6 +35,7 @@
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
         "lexik/jwt-authentication-bundle": "^2.16",
         "phpspec/phpspec": "^7.2",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.5",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0",
         "psalm/plugin-phpunit": "^0.17",
