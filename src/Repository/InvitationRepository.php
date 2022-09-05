@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Repository;
 
+use DateTimeInterface;
 use Setono\SyliusTrustpilotPlugin\Model\InvitationInterface;
 use Setono\SyliusTrustpilotPlugin\Workflow\InvitationWorkflow;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -29,5 +30,16 @@ class InvitationRepository extends EntityRepository implements InvitationReposit
         $objs = $qb->getQuery()->getResult();
 
         return $objs;
+    }
+
+    public function removeOlderThan(DateTimeInterface $threshold): void
+    {
+        $this->createQueryBuilder('o')
+            ->delete()
+            ->andWhere('o.createdAt <= :threshold')
+            ->setParameter('threshold', $threshold)
+            ->getQuery()
+            ->execute()
+        ;
     }
 }

@@ -38,6 +38,10 @@ final class Configuration implements ConfigurationInterface
                 ->scalarNode('invitation_order_state')
                     ->info('The state in which a order must be before an invitation based on this order is sent out')
                     ->defaultValue(OrderInterface::STATE_FULFILLED)
+                ->end()
+                ->integerNode('prune_older_than')
+                    ->info('Prune invitations that are older than this number of minutes. Default: 30 days (30 * 24 * 60)')
+                    ->defaultValue(43_200) // 30 days
         ;
 
         $this->addResourcesSection($rootNode);

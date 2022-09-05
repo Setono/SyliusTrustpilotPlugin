@@ -13,6 +13,9 @@ class ProcessCommand extends Command
 {
     protected static $defaultName = 'setono:sylius-trustpilot:process';
 
+    /** @var string|null */
+    protected static $defaultDescription = 'Will start the processing of invitations';
+
     private InvitationDispatcherInterface $invitationDispatcher;
 
     public function __construct(
