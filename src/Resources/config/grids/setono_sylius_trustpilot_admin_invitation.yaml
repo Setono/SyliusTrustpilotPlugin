@@ -36,6 +36,8 @@ sylius_grid:
                         format: d-m-Y H:i
             actions:
                 main:
+                    blacklisted_customers:
+                        type: blacklisted_customers
                     channel_configurations:
                         type: channel_configurations
                 item:

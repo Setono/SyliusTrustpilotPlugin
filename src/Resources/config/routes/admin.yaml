@@ -1,3 +1,16 @@
+setono_sylius_trustpilot_admin_blacklisted_customer:
+    resource: |
+        alias: setono_sylius_trustpilot.blacklisted_customer
+        section: admin
+        permission: true
+        templates: '@SyliusAdmin\\Crud'
+        redirect: index
+        grid: setono_sylius_trustpilot_admin_blacklisted_customer
+        vars:
+            index:
+                icon: 'star'
+    type: sylius.resource
+
 setono_sylius_trustpilot_admin_channel_configuration:
     resource: |
         alias: setono_sylius_trustpilot.channel_configuration
