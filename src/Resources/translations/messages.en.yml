@@ -8,12 +8,16 @@ setono_sylius_trustpilot:
     ui:
         afs_email: AFS email
         blacklist_customer: Blacklist customer
+        blacklisted_at: Blacklisted at
+        blacklisted_customers: Blacklisted customers
         channel_configurations: Channel configurations
+        edit_blacklisted_customer: Edit blacklisted customer
         edit_channel_configuration: Edit channel configuration
         failed: Failed
         ineligible: Ineligible
         initial: Initial
         invitations: Invitations
+        new_blacklisted_customer: New blacklisted customer
         new_channel_configuration: New channel configuration
         pending: Pending
         preferred_send_time: Preferred send time

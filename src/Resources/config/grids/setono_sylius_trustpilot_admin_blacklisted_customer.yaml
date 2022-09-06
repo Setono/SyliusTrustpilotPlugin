@@ -1,0 +1,26 @@
+sylius_grid:
+    grids:
+        setono_sylius_trustpilot_admin_blacklisted_customer:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%setono_sylius_trustpilot.model.blacklisted_customer.class%"
+            limits: [100, 250, 500, 1000]
+            fields:
+                email:
+                    type: string
+                    label: sylius.ui.customer
+                createdAt:
+                    type: datetime
+                    label: setono_sylius_trustpilot.ui.blacklisted_at
+                    options:
+                        format: d-m-Y H:i
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

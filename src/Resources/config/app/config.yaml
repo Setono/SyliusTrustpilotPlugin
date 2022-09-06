@@ -1,4 +1,5 @@
 imports:
+    - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/grids/setono_sylius_trustpilot_admin_blacklisted_customer.yaml" }
     - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/grids/setono_sylius_trustpilot_admin_channel_configuration.yaml" }
     - { resource: "@SetonoSyliusTrustpilotPlugin/Resources/config/grids/setono_sylius_trustpilot_admin_invitation.yaml" }
 
@@ -17,6 +18,7 @@ sylius_grid:
     templates:
         action:
             blacklist_customer: "@SetonoSyliusTrustpilotPlugin/admin/grid/action/blacklist_customer.html.twig"
+            blacklisted_customers: "@SetonoSyliusTrustpilotPlugin/admin/grid/action/blacklisted_customers.html.twig"
             channel_configurations: "@SetonoSyliusTrustpilotPlugin/admin/grid/action/channel_configurations.html.twig"
 
 sylius_ui:
