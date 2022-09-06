@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\SyliusTrustpilotPlugin\Model;
 
+use DateInterval;
 use DateTimeInterface;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -21,11 +22,11 @@ interface ChannelConfigurationInterface extends ResourceInterface, ChannelAwareI
     public function setAfsEmail(string $afsEmail): void;
 
     /**
-     * The number of seconds to delay the send of an invitation
+     * ISO 8601 formatted interval string. See https://www.php.net/manual/en/dateinterval.construct.php
      */
-    public function getSendDelay(): int;
+    public function getSendDelay(): DateInterval;
 
-    public function setSendDelay(int $sendDelay): void;
+    public function setSendDelay(DateInterval $sendDelay): void;
 
     /**
      * Returns the hour and minutes for the preferred send time

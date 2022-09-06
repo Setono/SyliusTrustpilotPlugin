@@ -6,7 +6,7 @@
         </id>
 
         <field name="afsEmail"/>
-        <field name="sendDelay" type="integer"/>
+        <field name="sendDelay" type="dateinterval"/>
         <field name="preferredSendTime"/>
         <field name="templateId" nullable="true"/>
 
