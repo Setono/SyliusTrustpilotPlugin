@@ -30,7 +30,13 @@ final class PrunerTest extends TestCase
 
         $repository = $this->prophesize(InvitationRepositoryInterface::class);
         $repository->removeOlderThan(
-            Argument::which('getTimestamp', $thresholdDateTime->getTimestamp())
+            Argument::that(static function (DateTimeImmutable $argument) use ($thresholdDateTime) {
+                // this makes the test non-flaky since we allow a delay of 10 seconds between instantiating $thresholdDateTime
+                // and calling $pruner->prune() which should be more than enough
+                $diff = abs($argument->getTimestamp() - $thresholdDateTime->getTimestamp());
+
+                return $diff <= 10;
+            })
         )->shouldBeCalled();
 
         $pruner = new Pruner($repository->reveal(), $threshold);
