@@ -17,8 +17,10 @@ sylius_grid:
                     type: string
                     label: setono_sylius_trustpilot.ui.afs_email
                 sendDelay:
-                    type: string
+                    type: twig
                     label: setono_sylius_trustpilot.ui.send_delay
+                    options:
+                        template: "@SetonoSyliusTrustpilotPlugin/admin/grid/label/send_delay.html.twig"
                 preferredSendTime:
                     type: string
                     label: setono_sylius_trustpilot.ui.preferred_send_time

@@ -6,8 +6,8 @@ namespace Setono\SyliusTrustpilotPlugin\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -19,8 +19,15 @@ final class ChannelConfigurationType extends AbstractResourceType
             ->add('afsEmail', EmailType::class, [
                 'label' => 'setono_sylius_trustpilot.form.channel_configuration.afs_email',
             ])
-            ->add('sendDelay', IntegerType::class, [
+            ->add('sendDelay', DateIntervalType::class, [
                 'label' => 'setono_sylius_trustpilot.form.channel_configuration.send_delay',
+                'with_minutes' => true,
+                'with_hours' => true,
+                'with_days' => true,
+                'with_weeks' => false,
+                'with_months' => false,
+                'with_years' => false,
+                'input' => 'dateinterval',
             ])
             ->add('preferredSendTime', TextType::class, [
                 'label' => 'setono_sylius_trustpilot.form.channel_configuration.preferred_send_time',

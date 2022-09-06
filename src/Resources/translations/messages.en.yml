@@ -2,9 +2,16 @@ setono_sylius_trustpilot:
     form:
         channel_configuration:
             afs_email: AFS email
-            send_delay: Send delay in seconds
+            send_delay: Send delay
             preferred_send_time: Preferred send time
             template_id: Template id
+        interval:
+            value: Value
+            unit: Unit
+            unit_minute: Minute(s)
+            unit_hour: Hour(s)
+            unit_day: Day(s)
+            unit_week: Week(s)
     ui:
         afs_email: AFS email
         blacklist_customer: Blacklist customer
@@ -16,6 +23,10 @@ setono_sylius_trustpilot:
         failed: Failed
         ineligible: Ineligible
         initial: Initial
+        interval:
+            days: day(s)
+            hours: hour(s)
+            minutes: minute(s)
         invitations: Invitations
         new_blacklisted_customer: New blacklisted customer
         new_channel_configuration: New channel configuration

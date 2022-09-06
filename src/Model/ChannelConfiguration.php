@@ -15,13 +15,18 @@ class ChannelConfiguration implements ChannelConfigurationInterface
 
     protected ?string $afsEmail = null;
 
-    protected int $sendDelay = 604_800; // a week
+    protected DateInterval $sendDelay;
 
     protected string $preferredSendTime = '09:00';
 
     protected ?string $templateId = null;
 
     protected ?ChannelInterface $channel = null;
+
+    public function __construct()
+    {
+        $this->sendDelay = new DateInterval('P7DT0H0M'); // a week
+    }
 
     public function getId(): ?int
     {
@@ -38,12 +43,12 @@ class ChannelConfiguration implements ChannelConfigurationInterface
         $this->afsEmail = $afsEmail;
     }
 
-    public function getSendDelay(): int
+    public function getSendDelay(): DateInterval
     {
         return $this->sendDelay;
     }
 
-    public function setSendDelay(int $sendDelay): void
+    public function setSendDelay(DateInterval $sendDelay): void
     {
         $this->sendDelay = $sendDelay;
     }
@@ -66,7 +71,7 @@ class ChannelConfiguration implements ChannelConfigurationInterface
         );
 
         return (new DateTimeImmutable())
-            ->add(new DateInterval(sprintf('PT%dS', $this->getSendDelay())))
+            ->add($this->getSendDelay())
             ->setTime($preferredSendTimeOnDay[0], $preferredSendTimeOnDay[1])
         ;
     }
