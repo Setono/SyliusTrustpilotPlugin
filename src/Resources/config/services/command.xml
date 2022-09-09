@@ -4,6 +4,11 @@
            xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="setono_sylius_trustpilot.command.fetch_reviews"
+                 class="Setono\SyliusTrustpilotPlugin\Command\FetchReviewsCommand">
+            <tag name="console.command"/>
+        </service>
+
         <service id="setono_sylius_trustpilot.command.process"
                  class="Setono\SyliusTrustpilotPlugin\Command\ProcessCommand">
             <argument type="service" id="setono_sylius_trustpilot.dispatcher.invitation"/>

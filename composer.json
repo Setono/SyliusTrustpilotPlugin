@@ -10,6 +10,7 @@
     ],
     "require": {
         "php": ">=7.4",
+        "ext-dom": "*",
         "ext-json": "*",
         "doctrine/orm": "^2.13",
         "doctrine/persistence": "^2.5",
@@ -24,6 +25,7 @@
         "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
         "symfony/messenger": "^4.4 || ^5.4 || ^6.0",
         "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
+        "symfony/panther": "^1.1",
         "symfony/routing": "^4.4 || ^5.4 || ^6.0",
         "symfony/translation-contracts": "^2.5 || ^3.1",
         "symfony/workflow": "^4.4 || ^5.4 || ^6.0",
@@ -32,6 +34,7 @@
     },
     "require-dev": {
         "api-platform/core": "^2.6",
+        "dbrekelmans/bdi": "^1.0",
         "friendsofsymfony/oauth-server-bundle": ">2.0.0-alpha.0 ^2.0@dev",
         "lexik/jwt-authentication-bundle": "^2.16",
         "phpspec/phpspec": "^7.2",
